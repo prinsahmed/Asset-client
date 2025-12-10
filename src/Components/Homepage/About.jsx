@@ -7,7 +7,7 @@ import coachImg from '../../assets/coaching.png'
 const About = () => {
     return (
         <div>
-            <h2 className='text-center text-4xl font-semibold mt-20 mb-10'>About Us</h2>
+            <h2 className='text-3xl text-center font-extrabold text-gray-900 mt-20 mb-10'>About Us</h2>
             <div className='flex justify-center  gap-x-5 '>
                 <div className="space-y-4">
 
