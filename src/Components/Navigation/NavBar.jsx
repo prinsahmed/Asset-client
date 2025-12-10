@@ -1,9 +1,29 @@
-import React from 'react';
-import { NavLink } from 'react-router';
+import React, { useContext } from 'react';
+import { Link, NavLink } from 'react-router';
+import { AuthContext } from '../../Context/Context';
+import Swal from 'sweetalert2';
 
 const NavBar = () => {
+
+    const { user, signOutCurrentUser } = useContext(AuthContext);
+
+    function handleSignOut() {
+        signOutCurrentUser()
+            .then(() => {
+
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Successfully logged out",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+
+            })
+    }
+
     return (
-        <div className="navbar bg-base-100 shadow-sm">
+        <div className="navbar bg-[#696FC7]  shadow-sm ">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -12,22 +32,27 @@ const NavBar = () => {
                     <ul
                         tabIndex="-1"
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                        <li><NavLink>Join as Employee</NavLink></li>
-                        <li><NavLink>Join as HR</NavLink></li>
-                        
+                        <li><NavLink to='/'>Home</NavLink></li>
+                        <li><NavLink to='/auth/employee-registration'>Join as Employee</NavLink></li>
+                        <li><NavLink to='/auth/HR-registration'>Join as HR</NavLink></li>
                     </ul>
                 </div>
-                <NavLink to='/' className="btn btn-ghost text-xl">AssetVerse</NavLink>
+
+                <NavLink to='/' className="btn btn-ghost text-xl p-0">AssetVerse</NavLink>
+
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
+                    <li><NavLink to='/'>Home</NavLink></li>
                     <li><NavLink to='/auth/employee-registration'>Join as Employee</NavLink></li>
-                    <li><NavLink to = '/auth/HR-registration'>Join as HR</NavLink></li>
-                   
+                    <li><NavLink to='/auth/HR-registration'>Join as HR</NavLink></li>
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                {
+                    user ? <button onClick={handleSignOut} className='button-style'>Logout</button> :
+                        <Link to='/auth/login' className='button-style'>Login</Link>
+                }
             </div>
         </div>
     );

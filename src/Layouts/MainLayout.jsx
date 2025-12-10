@@ -1,10 +1,12 @@
 import React from 'react';
 import NavBar from '../Components/Navigation/NavBar';
+import { Outlet } from 'react-router';
 
 const MainLayout = () => {
     return (
-        <div>
-           <NavBar/>
+        <div className='bg-[#F7F6F2]'>
+            <NavBar />
+            <Outlet />
         </div>
     );
 };

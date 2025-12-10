@@ -4,15 +4,27 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../Context/Context';
 import { Link } from 'react-router';
+import Swal from 'sweetalert2';
 
 
 const AuthEmployee = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { signInEmail, passResetEmail } = useContext(AuthContext);
+    const { signInEmail } = useContext(AuthContext);
 
     function onSubmit(data) {
         signInEmail(data.email, data.password)
+            .then(res => {
+                if (res) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Successfully registered",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
             .catch(error => {
                 console.log(error.message)
             });
@@ -22,7 +34,7 @@ const AuthEmployee = () => {
 
     return (
         <div>
-            <div className="hero bg-base-200 min-h-screen">
+            <div className="hero  min-h-screen">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="text-center lg:text-left">
                         <h1 className="text-5xl font-bold">Login now!</h1>
@@ -55,7 +67,7 @@ const AuthEmployee = () => {
 
                                     <label className='label mt-2'>Date of Birth</label>
                                     <DatePicker showIcon selected={selectedDate} onChange={setSelectedDate} />
-                                    <div><Link to ='/auth/forget-pass' className="link link-hover">Forgot password?</Link></div>
+                                    <div><Link to='/auth/forget-pass' className="link link-hover">Forgot password?</Link></div>
                                     <button className="btn btn-neutral mt-4">Register</button>
                                 </fieldset>
                             </form>

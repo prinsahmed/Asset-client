@@ -1,15 +1,23 @@
 import { createBrowserRouter } from "react-router";
 import MainLayout from "../Layouts/MainLayout";
 import AuthLayout from "../Layouts/AuthLayout";
-import AuthEmployee from "../Components/Authentication/AuthEmployee";
 import AuthHR from "../Components/Authentication/AuthHR";
 import ForgotPass from "../Components/Authentication/ForgotPass";
-
+import UserLogin from "../Components/Authentication/UserLogin";
+import AuthEmployee from "../Components/Authentication/AuthEmployee"
+import HomePage from "../Pages/Homepage";
 
 export const router = createBrowserRouter([
     {
         path:'/',
-        Component:MainLayout
+        Component:MainLayout,
+        children:[
+            {
+               index:true,
+               Component:HomePage
+                
+            }
+        ]
     },
     {
         path:'auth',
@@ -22,6 +30,10 @@ export const router = createBrowserRouter([
             {
                 path:'HR-registration',
                 Component:AuthHR
+            },
+            {
+                path:'login',
+                Component:UserLogin
             },
             {
                 path:'forget-pass',
