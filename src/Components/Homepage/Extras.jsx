@@ -1,4 +1,5 @@
 import React from 'react';
+import CardAnimation from '../Animations/CardAnimation';
 
 const Extras = () => {
     return (
@@ -14,31 +15,43 @@ const Extras = () => {
                     <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-3">
 
                         {/* Step 1 */}
-                        <div className="bg-gray-50 p-8 rounded-xl shadow-[0px_8px_24px_rgba(149,157,165,0.2)]">
+                        <CardAnimation
+                        initial={{ opacity: 0, y: -30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        delay={0.2}
+                        className="bg-gray-50 p-8 rounded-xl shadow-[0px_8px_24px_rgba(149,157,165,0.2)]">
                             <div className="text-indigo-500 text-5xl mb-4">📝</div>
                             <h3 className="text-xl font-semibold mb-2">1. Register & Add Assets</h3>
                             <p className="text-gray-600">
                                 Sign up and quickly add your assets to start managing them efficiently.
                             </p>
-                        </div>
+                        </CardAnimation>
 
                         {/* Step 2 */}
-                        <div className="bg-gray-50 p-8 rounded-xl shadow-[0px_8px_24px_rgba(149,157,165,0.2)]">
+                        <CardAnimation
+                        initial={{ opacity: 0, y: -30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        delay={0.4}
+                        className="bg-gray-50 p-8 rounded-xl shadow-[0px_8px_24px_rgba(149,157,165,0.2)]">
                             <div className="text-indigo-500 text-5xl mb-4">📊</div>
                             <h3 className="text-xl font-semibold mb-2">2. Track & Monitor</h3>
                             <p className="text-gray-600">
                                 Keep track of assets in real time and monitor performance through your dashboard.
                             </p>
-                        </div>
+                        </CardAnimation>
 
                         {/* Step 3 */}
-                        <div className="bg-gray-50 p-8 rounded-xl shadow-[0px_8px_24px_rgba(149,157,165,0.2)]">
+                        <CardAnimation
+                        initial={{ opacity: 0, y: -30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        delay={0.6}
+                        className="bg-gray-50 p-8 rounded-xl shadow-[0px_8px_24px_rgba(149,157,165,0.2)]">
                             <div className="text-indigo-500 text-5xl mb-4">🔔</div>
                             <h3 className="text-xl font-semibold mb-2">3. Get Alerts & Insights</h3>
                             <p className="text-gray-600">
                                 Receive maintenance alerts, usage statistics, and actionable insights to stay ahead.
                             </p>
-                        </div>
+                        </CardAnimation>
 
                     </div>
                 </div>

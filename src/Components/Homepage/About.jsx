@@ -3,6 +3,7 @@ import trackImg from '../../assets/tracking.png'
 import increaseImg from '../../assets/increase.png'
 import scalableImg from '../../assets/scalable.png'
 import coachImg from '../../assets/coaching.png'
+import CardAnimation from '../Animations/CardAnimation';
 
 const About = () => {
     return (
@@ -11,37 +12,51 @@ const About = () => {
             <div className='flex justify-center  gap-x-5 '>
                 <div className="space-y-4">
 
-                    <div className="bg-white shadow-[0px_8px_24px_rgba(149,157,165,0.2)] rounded-xl p-6 ml-0">
+                    <CardAnimation
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        delay={0} className="bg-white shadow-[0px_8px_24px_rgba(149,157,165,0.2)] rounded-xl p-6 ml-0">
                         <div className='flex items-center gap-x-1'>
                             <img className='w-12' src={trackImg} alt="tracking asset" />
                             <h3 className="font-semibold text-lg">Centralized Asset Tracking</h3>
                         </div>
                         <p className='text-[15px] text-gray-600'>Keep all company assets—devices, documents, equipment, and resources—in one organized dashboard for complete visibility and control.</p>
-                    </div>
+                    </CardAnimation>
 
-                    <div className="bg-white shadow-[0px_8px_24px_rgba(149,157,165,0.2)] rounded-xl p-6 ml-5">
+                    <CardAnimation
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        delay={0.1} className="bg-white shadow-[0px_8px_24px_rgba(149,157,165,0.2)] rounded-xl p-6 ml-5">
                         <div className='flex items-center gap-x-2'>
                             <img className='w-10' src={coachImg} alt="smart management" />
                             <h3 className="font-semibold text-lg">Smart Employee & HR Management</h3>
                         </div>
                         <p className='text-[15px] text-gray-600'>Streamline employee onboarding, record-keeping, and role assignments with automated workflows designed for HR teams.</p>
-                    </div>
+                    </CardAnimation >
 
-                    <div className="bg-white shadow-[0px_8px_24px_rgba(149,157,165,0.2)] rounded-xl p-6 ml-10">
+                    <CardAnimation
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        delay={0.2}
+                        className="bg-white shadow-[0px_8px_24px_rgba(149,157,165,0.2)] rounded-xl p-6 ml-10">
                         <div className='flex items-center gap-x-2'>
                             <img className='w-10' src={increaseImg} alt="productivity" />
                             <h3 className="font-semibold text-lg">Improve Productivity & Reduce Manual Work</h3>
                         </div>
                         <p className='text-[15px] text-gray-600'>Automated updates, reminders, reports, and asset lifecycle tracking eliminate manual errors and save hours of administration time.</p>
-                    </div>
+                    </CardAnimation>
 
-                    <div className="bg-white shadow-[0px_8px_24px_rgba(149,157,165,0.2)] rounded-xl p-6 ml-14">
+                    <CardAnimation
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        delay={0.3}
+                        className="bg-white shadow-[0px_8px_24px_rgba(149,157,165,0.2)] rounded-xl p-6 ml-14">
                         <div className='flex items-center gap-x-2'>
                             <img className='w-10' src={scalableImg} alt="scalable" />
                             <h3 className="font-semibold text-lg">Scalable for Growing Companies</h3>
                         </div>
                         <p className='text-[15px] text-gray-600'>Whether you manage 5 employees or 500, AssetVerse adapts easily as your business expands.</p>
-                    </div>
+                    </CardAnimation>
 
                 </div>
                 <div className='shadow-[0px_8px_24px_rgba(149,157,165,0.2)] p-6'>
