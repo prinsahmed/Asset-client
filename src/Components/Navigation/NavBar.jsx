@@ -35,6 +35,7 @@ const NavBar = () => {
                         <li><NavLink to='/'>Home</NavLink></li>
                         <li><NavLink to='/auth/employee-registration'>Join as Employee</NavLink></li>
                         <li><NavLink to='/auth/HR-registration'>Join as HR</NavLink></li>
+                        <li><NavLink to='/dash'>Dashboard</NavLink></li>
                     </ul>
                 </div>
 
@@ -46,6 +47,7 @@ const NavBar = () => {
                     <li><NavLink to='/'>Home</NavLink></li>
                     <li><NavLink to='/auth/employee-registration'>Join as Employee</NavLink></li>
                     <li><NavLink to='/auth/HR-registration'>Join as HR</NavLink></li>
+                    <li><NavLink to='/dash'>Dashboard</NavLink></li>
                 </ul>
             </div>
             <div className="navbar-end">

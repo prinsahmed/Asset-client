@@ -5,7 +5,12 @@ import AuthHR from "../Components/Authentication/AuthHR";
 import ForgotPass from "../Components/Authentication/ForgotPass";
 import UserLogin from "../Components/Authentication/UserLogin";
 import AuthEmployee from "../Components/Authentication/AuthEmployee"
-import HomePage from "../Pages/Homepage";
+import HomePage from "../Pages/Homepage/HomePage";
+import DashboardLayout from "../Layouts/DashboardLayout";
+import AssetList from "../Pages/Dashboard/HR/AssetList";
+
+
+
 
 export const router = createBrowserRouter([
     {
@@ -38,6 +43,17 @@ export const router = createBrowserRouter([
             {
                 path:'forget-pass',
                 Component:ForgotPass
+            }
+        ]
+    },
+    {
+        path:'dash',
+        Component:DashboardLayout,
+        children:
+        [
+            {
+                path:'asset-list',
+                Component:AssetList
             }
         ]
     }
