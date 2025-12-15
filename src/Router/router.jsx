@@ -10,6 +10,7 @@ import DashboardLayout from "../Layouts/DashboardLayout";
 import AssetList from "../Pages/Dashboard/HR/AssetList";
 import AddAsset from "../Pages/Dashboard/HR/AddAsset";
 import EditAsset from "../Pages/Dashboard/HR/EditAsset";
+import AllRequests from "../Pages/Dashboard/HR/AllRequests";
 
 
 
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
             {
                 path:'edit-asset/:id',
                 Component:EditAsset
+            },
+            {
+                path:'all-request',
+                Component:AllRequests
             }
         ]
     }

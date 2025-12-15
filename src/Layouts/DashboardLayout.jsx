@@ -55,7 +55,7 @@ const DashboardLayout = () => {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink>
+                                <NavLink to='/dash/all-request'>
                                     <FaFileSignature />
                                     <span className="is-drawer-close:hidden">All Requests</span>
                                 </NavLink>

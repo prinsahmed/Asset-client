@@ -4,6 +4,8 @@ import { useAxios } from '../../../Hooks/Api/useAxios';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router';
 import DatePicker from 'react-datepicker';
+import Swal from 'sweetalert2';
+import { colgroup } from 'motion/react-client';
 
 const EditAsset = () => {
 
@@ -11,12 +13,12 @@ const EditAsset = () => {
     const { register, handleSubmit } = useForm();
     const [selectedDate, setSelectedDate] = useState(new Date());
     const axiosSecure = useAxios();
-    const {id} = useParams();
-    
+    const { id } = useParams();
+
 
     const { data: assets = {}, isLoading } = useQuery({
         queryKey: ["assets", id],
-        queryFn: async ({queryKey}) => {
+        queryFn: async ({ queryKey }) => {
             const [, id] = queryKey;
             const res = await axiosSecure.get(`/all-asset/${id}`);
             return res.data;
@@ -24,8 +26,30 @@ const EditAsset = () => {
 
     });
 
- console.log(assets);
     const onSubmit = data => {
+        const editedProduct = {
+            name: data.productName,
+            companyName: data.companyName,
+            date: selectedDate,
+            image: data.productImage,
+            type: data.productType,
+            quantity: data.productQuantity
+        }
+
+        axiosSecure.put(`/all-asset/edit/${id}`, editedProduct)
+            .then((res) => {
+                if (res) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Successfully Edited",
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
+                }
+            })
+            .catch(err => console.log(err.message))
+
 
     }
 
@@ -141,7 +165,7 @@ const EditAsset = () => {
 
                         <div className="col-span-1 md:col-span-2 flex justify-end">
                             <button className="btn btn-neutral w-full md:w-48 mt-4">
-                                Add Product
+                                Edit Product
                             </button>
                         </div>
 
