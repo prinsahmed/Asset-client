@@ -49,7 +49,7 @@ const DashboardLayout = () => {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink>
+                                <NavLink to = '/dash/add-asset' >
                                     <IoBagAdd />
                                     <span className="is-drawer-close:hidden">Add Asset</span>
                                 </NavLink>
@@ -69,7 +69,7 @@ const DashboardLayout = () => {
                             <li>
                                 <NavLink>
                                     <RiTeamFill />
-                                    <span className="is-drawer-close:hidden">My Team</span>
+                                    <span className="is-drawer-close:hidden">Upgrade Package</span>
                                 </NavLink>
                             </li>
                             <li>

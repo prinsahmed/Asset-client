@@ -5,30 +5,59 @@ import { useForm } from 'react-hook-form';
 import DatePicker from 'react-datepicker';
 import { AuthContext } from '../../Context/Context';
 import Swal from 'sweetalert2';
+import { useAxios } from '../../Hooks/Api/useAxios';
+import axios from 'axios';
 
 const AuthHR = () => {
 
     const { signInEmail } = useContext(AuthContext);
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const [image, setImage] = useState();
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const axiosSecure = useAxios();
 
     function onSubmit(data) {
+
+        const imageFile = data.companyLogo[0];
+        const formData = new FormData();
+        formData.append('image', imageFile)
+
+
+
+
         const HRData = {
             name: data.name,
-            companyName: data.company - name,
-            email: data.email
+            companyName: data.companyName,
+            companyLogo: image,
+            email: data.email,
+            password: data.password,
+            dateOfBirth: selectedDate
+
         }
 
         signInEmail(data.email, data.password)
             .then(res => {
                 if (res) {
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Successfully registered",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+
+                    axios.post(`https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_IMAGE_FILE_KEY}`, formData)
+                        .then(res => {
+                            setImage(res.data.data.display_url);
+                        })
+
+                    axiosSecure.post('/user-HR', HRData)
+                        .then(res => {
+
+                            if (res) {
+
+                                Swal.fire({
+                                    position: "top-end",
+                                    icon: "success",
+                                    title: "Successfully registered",
+                                    showConfirmButton: false,
+                                    timer: 1000
+                                });
+                            }
+                        })
                 }
             })
             .catch(error => console.log(error.message))
@@ -54,10 +83,10 @@ const AuthHR = () => {
                                     <input type="text" {...register('name')} required className="input" placeholder="Name" />
 
                                     <label className="label">Company Name</label>
-                                    <input type="text" {...register('company-name')} required className="input" placeholder="Company name" />
+                                    <input type="text" {...register('companyName')} required className="input" placeholder="Company name" />
 
                                     <label className="label">Company Logo</label>
-                                    <input type="file" {...register('company-logo')} required className="file-input file-input-info" placeholder="Company logo" />
+                                    <input type="file" {...register('companyLogo')} required className="file-input file-input-info" placeholder="Company logo" />
 
                                     <label className="label">Email</label>
                                     <input type="email" {...register('email')} required className="input" placeholder="Email" />

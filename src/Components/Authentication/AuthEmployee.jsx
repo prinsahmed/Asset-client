@@ -5,24 +5,46 @@ import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../Context/Context';
 import { Link } from 'react-router';
 import Swal from 'sweetalert2';
+import { useAxios } from '../../Hooks/Api/useAxios';
 
 
 const AuthEmployee = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { signInEmail } = useContext(AuthContext);
+    const axiosSecure = useAxios();
 
     function onSubmit(data) {
+
+        const EmplyeeData = {
+            name: data.name,
+            email: data.email,
+            password: data.password,
+            dateOfBirth: selectedDate,
+            
+
+        }
+        console.log(EmplyeeData);
+
         signInEmail(data.email, data.password)
             .then(res => {
                 if (res) {
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Successfully registered",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+
+                    axiosSecure.post('/user-employee', EmplyeeData)
+                        .then(res => {
+                            if (res) {
+                                console.log(res);
+                                Swal.fire({
+                                    position: "top-end",
+                                    icon: "success",
+                                    title: "Successfully registered",
+                                    showConfirmButton: false,
+                                    timer: 1000
+                                });
+                            }
+                        })
+
+
                 }
             })
             .catch(error => {

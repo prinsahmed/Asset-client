@@ -8,6 +8,8 @@ import AuthEmployee from "../Components/Authentication/AuthEmployee"
 import HomePage from "../Pages/Homepage/HomePage";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import AssetList from "../Pages/Dashboard/HR/AssetList";
+import AddAsset from "../Pages/Dashboard/HR/AddAsset";
+import EditAsset from "../Pages/Dashboard/HR/EditAsset";
 
 
 
@@ -54,6 +56,14 @@ export const router = createBrowserRouter([
             {
                 path:'asset-list',
                 Component:AssetList
+            },
+            {
+                path:'add-asset',
+                Component:AddAsset
+            },
+            {
+                path:'edit-asset/:id',
+                Component:EditAsset
             }
         ]
     }
