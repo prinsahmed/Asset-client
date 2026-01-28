@@ -23,7 +23,7 @@ const NavBar = () => {
     }
 
     return (
-        <div className="navbar bg-[#696FC7]  shadow-sm ">
+        <div className="navbar bg-[#5D7BFF]  shadow-sm ">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -31,23 +31,27 @@ const NavBar = () => {
                     </div>
                     <ul
                         tabIndex="-1"
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                        className="menu nav2 menu-sm text-white  dropdown-content  rounded-box z-1 mt-3 w-52 p-2 shadow">
                         <li><NavLink to='/'>Home</NavLink></li>
-                        <li><NavLink to='/auth/employee-registration'>Join as Employee</NavLink></li>
-                        <li><NavLink to='/auth/HR-registration'>Join as HR</NavLink></li>
-                        <li><NavLink to='/dash'>Dashboard</NavLink></li>
+                        {
+                            !user && <><li><NavLink to='/auth/employee-registration'>Join as Employee</NavLink></li>
+                                <li><NavLink to='/auth/HR-registration'>Join as HR</NavLink></li></>
+                        }
+                        {user && <li><NavLink to='/dash'>Dashboard</NavLink></li>}
                     </ul>
                 </div>
 
-                <NavLink to='/' className="btn btn-ghost text-xl p-0">AssetVerse</NavLink>
+                <NavLink to='/' className="btn btn-ghost text-white text-xl p-0">AssetVerse</NavLink>
 
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
+                <ul className="menu nav2 menu-horizontal text-white px-1">
                     <li><NavLink to='/'>Home</NavLink></li>
-                    <li><NavLink to='/auth/employee-registration'>Join as Employee</NavLink></li>
-                    <li><NavLink to='/auth/HR-registration'>Join as HR</NavLink></li>
-                    <li><NavLink to='/dash'>Dashboard</NavLink></li>
+                    {
+                        !user && <><li><NavLink to='/auth/employee-registration'>Join as Employee</NavLink></li>
+                            <li><NavLink to='/auth/HR-registration'>Join as HR</NavLink></li></>
+                    }
+                    {user && <li><NavLink to='/dash'>Dashboard</NavLink></li>}
                 </ul>
             </div>
             <div className="navbar-end">

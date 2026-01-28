@@ -10,8 +10,11 @@ body{
 }
 
 
-li .active{
-    border-bottom: 2px solid white;
+.nav li .active{
+    color: black;
+}
+.nav2 li .active{
+    color: black;
 }
 
 .button-style{

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect } from "react";
+
 
 
 
@@ -9,19 +9,19 @@ const api = axios.create({
 })
 
 export const useAxios = () => {
-    useEffect(() => {
+    
         api.interceptors.request.use(
             (config) => {
-                const token = localStorage.getItem('token');
+                const token = localStorage.getItem('access-token');
 
                 if (token) {
-                    config.headers.Authorization = `Bearer ${token}`;
+                    config.headers.authorization = `Bearer ${token}`;
                 }
                 return config;
             },
             (error) => Promise.reject(error)
         )
 
-    }, [])
+  
     return api;
 }

@@ -4,29 +4,42 @@ import { useAxios } from '../../../Hooks/Api/useAxios';
 import Swal from 'sweetalert2';
 import DatePicker from 'react-datepicker';
 import { AuthContext } from '../../../Context/Context';
+import axios from 'axios';
 
 
 const AddAsset = () => {
     const { register, handleSubmit } = useForm();
+    const [image, setImage] = useState();
     const [selectedDate, setSelectedDate] = useState(new Date());
     const axiosSecure = useAxios();
     const { user } = useContext(AuthContext)
 
     function onSubmit(data) {
+
+        const imageFile = data.ProductImage[0];
+        const formData = new FormData();
+        formData.append('image', imageFile)
+
+
         const addedProduct = {
             productName: data.productName,
             companyName: data.companyName,
             hrEmail: user?.email,
             date: selectedDate,
-            productImage: data.productImage,
+            productImage: image,
             productType: data.productType,
             productQuantity: data.productQuantity
         }
 
-        console.log(data.productQuantity);
+
 
         axiosSecure.post('/add-product', addedProduct)
             .then(res => {
+                axios.post(`https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_IMAGE_FILE_KEY}`, formData)
+                    .then(res => {
+                        setImage(res.data.data.display_url);
+                    })
+
                 if (res) {
                     Swal.fire({
                         position: "top-end",

@@ -1,20 +1,23 @@
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useAxios } from '../../../Hooks/Api/useAxios';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router';
+import { AuthContext } from '../../../Context/Context';
 
 const AssetList = () => {
     const [searchText, setSearchText] = useState("");
     const axiosSecure = useAxios();
+    const {user} = useContext(AuthContext)
 
     const { data: assets = [], isLoading, refetch } = useQuery({
-        queryKey: ["assets", searchText],
+        queryKey: ["assets", searchText, user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/all-asset?search=${searchText}`);
+            const res = await axiosSecure.get(`/all-asset?email=${user?.email}&search=${searchText}`);
             return res.data;
         },
-
+        enabled: !!user?.email
+        
     });
 
     const handleSearch = (e) => {
@@ -84,16 +87,18 @@ const AssetList = () => {
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td className="font-semibold">{ele.name}</td>
+                                            <td className="font-semibold">{ele.productName
+
+                                            }</td>
                                             <td>
                                                 <span className="badge badge-info badge-outline">
-                                                    {ele.type}
+                                                    {ele.productType}
                                                 </span>
                                             </td>
-                                            <td>{ele.quantity}</td>
+                                            <td>{ele.productQuantity}</td>
                                             <td>{ele.date}</td>
                                             <td className="text-center space-x-2">
-                                                <Link  to= {`/dash/edit-asset/${ele._id}`} className="btn btn-sm btn-outline btn-info">
+                                                <Link to={`/dash/edit-asset/${ele._id}`} className="btn btn-sm btn-outline btn-info">
                                                     Edit
                                                 </Link>
                                                 <button onClick={() => handleDelete(ele._id)} className="btn btn-sm btn-outline btn-error">

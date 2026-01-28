@@ -24,12 +24,11 @@ const AuthEmployee = () => {
             
 
         }
-        console.log(EmplyeeData);
+
 
         signInEmail(data.email, data.password)
             .then(res => {
                 if (res) {
-
                     axiosSecure.post('/user-employee', EmplyeeData)
                         .then(res => {
                             if (res) {
