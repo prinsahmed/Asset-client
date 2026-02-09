@@ -8,20 +8,15 @@ import { NavLink, Outlet } from 'react-router';
 import { AuthContext } from '../Context/Context';
 
 const DashboardLayout = () => {
-    const { roleUser, loading } = useContext(AuthContext);
+    const { userData } = useContext(AuthContext);
 
-    if(loading) return <span className="loading loading-spinner loading-xl"></span>
 
     return (
-        <div className="drawer bg-[#F5F8FF] lg:drawer-open">
+        <div className="drawer  lg:drawer-open">
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">
                 {/* Navbar */}
-                <nav className="navbar w-full rounded-l-full bg-[#5D7BFF]">
-                    <label htmlFor="my-drawer-4" aria-label="open sidebar" className="btn btn-square btn-ghost">
-                        {/* Sidebar toggle icon */}
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path><path d="M9 4v16"></path><path d="M14 10l2 2l-2 2"></path></svg>
-                    </label>
+                <nav className="py-3 w-full rounded-bl-4xl mt-1 rounded-tr-4xl rounded-br-xl rounded-tl-xl bg-gradient-to-br from-cyan-400 to-blue-500 text-white">
                     <div className="px-4">Navbar Title</div>
                 </nav>
                 {/* Page content here */}
@@ -30,11 +25,19 @@ const DashboardLayout = () => {
 
             </div>
 
-            <div className="drawer-side is-drawer-close:overflow-visible">
-                <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
-                <div className="flex min-h-full flex-col rounded-tr-[60px] items-start bg-[#5D7BFF] is-drawer-close:w-14 is-drawer-open:w-64">
+            <div className='min-w-[220px]'>
+                <div className='bg-gradient-to-br from-cyan-400 to-blue-500 text-white mr-1 mt-1 mb-2 rounded-bl-4xl rounded-tr-4xl rounded-br-xl rounded-tl-xl py-3'>
+                    <NavLink className='flex gap-2 items-center ' to={userData?.role === "HR" ? '/dash/HR-profile' : '/dash/employee-profile'}>
+                        <div className='ml-4'>
+                            <img className='w-6 h-6 rounded-full' src={userData.userImage} alt="User Image" />
+                        </div>
+                        <p className='text-xs'>
+                            {userData.name}
+                        </p></NavLink>
+                </div>
+                <div className="flex min-h-full flex-col rounded-t-2xl  items-start bg-gradient-to-br from-cyan-400 to-blue-500 text-white is-drawer-close:w-14 is-drawer-open:w-64">
                     {/* Sidebar content here */}
-                    <ul className="menu text-white w-full grow">
+                    <ul className="menu p-0 pl-2 text-gray-100 w-full grow ">
                         {/* List item */}
                         <li>
                             <NavLink to='/' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
@@ -46,9 +49,9 @@ const DashboardLayout = () => {
 
                         {/* List item */}
 
-                        <div className='nav space-y-3 text-base'>
+                        <div className='nav space-y-3 text-s '>
                             {
-                                roleUser === 'HR' && <>
+                                userData?.role === 'HR' && <>
                                     <li>
                                         <NavLink to='/dash/asset-list'>
                                             <MdWebAsset />
@@ -75,19 +78,19 @@ const DashboardLayout = () => {
                                     </li>
                                     <li>
                                         <NavLink to='/dash/my-employee'>
-                                        <RiTeamFill />
-                                           
+                                            <RiTeamFill />
+
                                             <span className="is-drawer-close:hidden">Employee List</span>
                                         </NavLink>
                                     </li>
                                     <li>
-                                        <NavLink>
-                                             <FaList />
+                                        <NavLink to='/dash/HR-package'>
+                                            <FaList />
                                             <span className="is-drawer-close:hidden">Upgrade Package</span>
                                         </NavLink>
                                     </li>
                                     <li>
-                                        <NavLink>
+                                        <NavLink to='/dash/HR-profile'>
                                             <ImProfile />
                                             <span className="is-drawer-close:hidden">My Profile</span>
                                         </NavLink>
@@ -96,7 +99,7 @@ const DashboardLayout = () => {
                             }
 
                             {
-                                roleUser === 'Employee' && <>
+                                userData?.role === 'Employee' && <>
 
                                     <li>
                                         <NavLink to='/dash/employee-asset'>
@@ -119,7 +122,7 @@ const DashboardLayout = () => {
                                             <span className="is-drawer-close:hidden">My Team</span></NavLink>
                                     </li>
                                     <li>
-                                        <NavLink>
+                                        <NavLink to='/dash/employee-profile'>
                                             <ImProfile />
                                             <span className="is-drawer-close:hidden">My Profile</span>
                                         </NavLink>

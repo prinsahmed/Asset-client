@@ -4,10 +4,10 @@ import { useAxios } from '../../../Hooks/Api/useAxios';
 import { AuthContext } from '../../../Context/Context';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import CardAnimation from '../../../Components/Animations/CardAnimation';
 
 const EmployeeJoin = () => {
     const { register, handleSubmit } = useForm();
-    const [image, setImage] = useState();
     const axiosSecure = useAxios();
     const { user } = useContext(AuthContext)
 
@@ -18,24 +18,22 @@ const EmployeeJoin = () => {
         formData.append('image', imageFile)
 
 
-        const user = {
-            employeeName: data.employeeName,
-            employeeEmail:data.UserEmail,
-            hrEmail: data.HrEmail,
-            affiliationDate: new Date(),
-            approvalDate: null,
-            employeeImage: image,
-            status: 'pending'
-        }
 
-
-
-        axiosSecure.post('/employee-join', user)
+        axios.post(`https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_IMAGE_FILE_KEY}`, formData)
             .then(res => {
-                axios.post(`https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_IMAGE_FILE_KEY}`, formData)
-                    .then(res => {
-                        setImage(res.data.data.display_url);
-                    })
+
+                const user = {
+                    employeeName: data.employeeName,
+                    employeeEmail: data.UserEmail,
+                    hrEmail: data.HrEmail,
+                    affiliationDate: new Date(),
+                    approvalDate: null,
+                    employeeImage: res.data.data.display_url,
+                    status: 'pending'
+                }
+
+                axiosSecure.post('/employee-join', user)
+                    .catch(err => console.log(err.message))
 
                 if (res) {
                     Swal.fire({
@@ -52,14 +50,18 @@ const EmployeeJoin = () => {
 
     }
 
-    
+
 
     return (
-        <div className="min-h-screen bg-[#F5F8FF] p-4">
+        <CardAnimation
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0 }}
+            className="min-h-screen  p-4">
             <div className="max-w-7xl mx-auto">
 
 
-                <h1 className="text-3xl font-bold mb-6 text-gray-800">
+                <h1 className="text-xl font-semibold mb-1 text-gray-800">
                     Join a Company
                 </h1>
 
@@ -125,7 +127,7 @@ const EmployeeJoin = () => {
                 </div>
 
             </div>
-        </div>
+        </CardAnimation>
     );
 };
 

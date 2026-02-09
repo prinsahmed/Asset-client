@@ -5,7 +5,12 @@ import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router';
 import DatePicker from 'react-datepicker';
 import Swal from 'sweetalert2';
-import { colgroup } from 'motion/react-client';
+import axios from 'axios';
+import CardAnimation from '../../../Components/Animations/CardAnimation';
+import Lottie from 'lottie-react';
+import loadingAnimation from '../../../assets/Gears Lottie Animation.json'
+
+
 
 const EditAsset = () => {
 
@@ -14,6 +19,7 @@ const EditAsset = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const axiosSecure = useAxios();
     const { id } = useParams();
+
 
 
     const { data: assets = {}, isLoading } = useQuery({
@@ -26,43 +32,58 @@ const EditAsset = () => {
 
     });
 
+
     const onSubmit = data => {
-        const editedProduct = {
-            name: data.productName,
-            companyName: data.companyName,
-            date: selectedDate,
-            image: data.productImage,
-            type: data.productType,
-            quantity: data.productQuantity
-        }
 
-        axiosSecure.put(`/all-asset/edit/${id}`, editedProduct)
-            .then((res) => {
-                if (res) {
-                    Swal.fire({
-                        position: "center",
-                        icon: "success",
-                        title: "Successfully Edited",
-                        showConfirmButton: false,
-                        timer: 1000
-                    });
+        const imageFile = data.ProductImage[0];
+        const formData = new FormData();
+        formData.append('image', imageFile)
+
+
+
+
+
+        axios.post(`https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_IMAGE_FILE_KEY}`, formData)
+            .then(res => {
+
+                const editedProduct = {
+                    name: data.productName,
+                    companyName: data.companyName,
+                    date: selectedDate,
+                    image: res.data.data.display_url,
+                    type: data.productType,
+                    quantity: data.productQuantity
                 }
+
+                axiosSecure.put(`/all-asset/edit/${id}`, editedProduct)
+                    .then((res) => {
+
+                        if (res) {
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "Successfully Added",
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
+                        }
+                    })
+                    .catch(err => console.log(err.message))
             })
-            .catch(err => console.log(err.message))
-
 
     }
 
-    if (isLoading) {
-        return <span className="loading loading-spinner loading-xl"></span>;
-    }
-
+    if (isLoading) return <div className=' h-dvh flex justify-center items-center '>
+        <Lottie style={{ width: 400, height: 400 }} animationData={loadingAnimation} loop={true} />
+    </div>
 
     return (
-        <div className="min-h-screen bg-gray-100 p-6">
+        <CardAnimation
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0 }}
+            className="min-h-screen bg-gray-100 p-6">
             <div className="max-w-7xl mx-auto">
-
-
                 <h1 className="text-3xl font-bold mb-6 text-gray-800">
                     Edit Product
                 </h1>
@@ -76,7 +97,7 @@ const EditAsset = () => {
                             <input
                                 type="text"
                                 {...register('productName')}
-                                defaultValue={assets.name}
+                                defaultValue={assets.productName}
                                 required
                                 className="input input-bordered w-full"
                                 placeholder="Product Name"
@@ -102,8 +123,6 @@ const EditAsset = () => {
                             <input
                                 type="file"
                                 {...register('ProductImage')}
-                                defaultValue={assets.image}
-                                required
                                 className="file-input file-input-bordered file-input-info w-full"
                             />
                         </div>
@@ -112,7 +131,7 @@ const EditAsset = () => {
                         <div className="flex flex-col gap-1">
                             <label className="font-semibold">Product Type</label>
                             <select
-                                defaultValue={assets.type}
+                                defaultValue={assets.productType}
                                 {...register('productType')}
                                 required
                                 className="select select-bordered select-info w-full"
@@ -128,7 +147,7 @@ const EditAsset = () => {
                             <label className="font-semibold">Product Quantity</label>
                             <input
                                 type="number"
-                                defaultValue={assets.quantity}
+                                defaultValue={assets.productQuantity}
                                 {...register('productQuantity')}
                                 required
                                 className="input input-bordered w-full"
@@ -148,21 +167,6 @@ const EditAsset = () => {
                             />
                         </div>
 
-
-                        <div className="flex flex-col gap-1">
-                            <label className="font-semibold">HR Email</label>
-                            <input
-                                type="email"
-                                defaultValue={assets.email}
-                                readOnly
-                                {...register('email')}
-                                required
-                                className="input input-bordered w-full"
-                                placeholder="Email"
-                            />
-                        </div>
-
-
                         <div className="col-span-1 md:col-span-2 flex justify-end">
                             <button className="btn btn-neutral w-full md:w-48 mt-4">
                                 Edit Product
@@ -173,7 +177,7 @@ const EditAsset = () => {
                 </div>
 
             </div>
-        </div>
+        </CardAnimation>
 
     );
 };

@@ -1,8 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useAxios } from '../../../Hooks/Api/useAxios';
 import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../../../Context/Context';
 import Swal from 'sweetalert2';
+import CardAnimation from '../../../Components/Animations/CardAnimation';
+import Lottie from 'lottie-react';
+import loadingAnimation from '../../../assets/Gears Lottie Animation.json'
+
+
+
 
 const EmployeeAssets = () => {
     const axiosSecure = useAxios();
@@ -18,7 +24,7 @@ const EmployeeAssets = () => {
     });
 
     function handleReturn(id) {
-        axiosSecure.put(`/employee-assets-return/${id}`, {requestStatus:'returned'})
+        axiosSecure.put(`/employee-assets-return/${id}`, { requestStatus: 'returned' })
             .then(res => {
                 if (res.data.modifiedCount === 1) {
                     Swal.fire({
@@ -33,14 +39,20 @@ const EmployeeAssets = () => {
             })
     }
 
-
+    if (isLoading) return <div className=' h-dvh flex justify-center items-center '>
+        <Lottie style={{ width: 400, height: 400 }} animationData={loadingAnimation} loop={true} />
+    </div>
 
     return (
-        <div className="max-w-7xl mx-auto bg-[#F5F8FF] min-h-dvh  p-4">
+        <CardAnimation
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0 }}
+            className="max-w-7xl   min-h-dvh  p-4">
 
 
-            <div className="flex justify-between items-center mb-4">
-                <h2 className="text-2xl font-bold text-gray-800">Assigned Assets</h2>
+            <div className="flex justify-between items-center mb-5">
+                <h2 className="text-xl font-semibold mb-1 text-gray-800">Assigned Assets</h2>
                 <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
                     Print
                 </button>
@@ -62,33 +74,43 @@ const EmployeeAssets = () => {
 
 
             <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
+                <table className="table table-zebra w-full">
+                    <thead className="bg-gray-200 rounded-xl text-gray-700">
                         <tr>
-                            <th className="px-6 py-3 text-left text-gray-700 font-semibold">Asset Image</th>
-                            <th className="px-6 py-3 text-left text-gray-700 font-semibold">Asset Name</th>
-                            <th className="px-6 py-3 text-left text-gray-700 font-semibold">Asset Type</th>
-                            <th className="px-6 py-3 text-left text-gray-700 font-semibold">Company Name</th>
-                            <th className="px-6 py-3 text-left text-gray-700 font-semibold">Request Date</th>
-                            <th className="px-6 py-3 text-left text-gray-700 font-semibold">Approval Date</th>
-                            <th className="px-6 py-3 text-left text-gray-700 font-semibold">Status</th>
-                            <th className="px-6 py-3 text-left text-gray-700 font-semibold">Action</th>
+                            <th className='rounded-l-lg'>Asset Image</th>
+                            <th>Asset Name</th>
+                            <th>Asset Type</th>
+                            <th>Company Name</th>
+                            <th>Request Date</th>
+                            <th>Approval Date</th>
+                            <th>Status</th>
+                            <th className='rounded-r-lg'>Action</th>
                         </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
+                    <tbody className="bg-white divide-y rounded-b-lg divide-gray-200">
 
 
                         {
                             assets.map(ele => {
                                 return <tr key={ele._id} className="hover:bg-gray-50">
-                                    <td className="px-6 py-4"><img src="https://via.placeholder.com/50" className="h-12 w-12 rounded-md" /></td>
-                                    <td className="px-6 py-4 text-gray-800 font-medium">{ele.productName}</td>
-                                    <td className="px-6 py-4"><span className="px-2 py-1 rounded-2xl bg-green-100 text-green-800 text-sm font-semibold">{ele.productType}</span></td>
-                                    <td className="px-6 py-4 text-gray-600">{ele.companyName}</td>
-                                    <td className="px-6 py-4 text-gray-600">{ele.requestDate}</td>
-                                    <td className="px-6 py-4 text-gray-600">{ele.approvalDate}</td>
-                                    <td className="px-6 py-4"><span className="px-2 py-1 rounded-2xl bg-blue-100 text-blue-800 text-sm font-semibold">{ele.requestStatus}</span></td>
-                                    <td className="px-6 py-4">{
+                                    <td className="px-6 py-4">
+                                        <img src={ele.productImage} className="h-10 w-10 rounded-full" alt={ele.productName} />
+                                    </td>
+                                    <td className="px-6 py-2 text-gray-800 font-medium">{ele.productName}</td>
+                                    <td className="px-6 py-2"><span className="px-2 py-1 rounded-2xl bg-green-100 text-green-800 text-sm font-semibold">{ele.productType}</span></td>
+                                    <td className="px-6 py-2 text-gray-600">
+                                        {ele.companyName}
+                                    </td>
+                                    <td className="px-6 py-2 text-gray-600">
+                                        {new Date(ele.requestDate).toLocaleDateString()}
+                                    </td>
+                                    <td className="px-6 py-2 text-gray-600">{new Date(ele.approvalDate).toLocaleDateString()}
+
+                                    </td>
+                                    <td className="px-6 py-2">
+                                        <span className="px-2 py-1 rounded-2xl bg-blue-100 text-blue-800 text-sm font-semibold">{ele.requestStatus}</span>
+                                    </td>
+                                    <td className="px-6 py-2">{
                                         (ele.productType === 'Returnable' && ele.requestStatus === 'approved')
                                         && <button onClick={() => handleReturn(ele._id)} className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">Return</button>
                                     }</td>
@@ -101,7 +123,7 @@ const EmployeeAssets = () => {
                     </tbody>
                 </table>
             </div>
-        </div>
+        </CardAnimation>
     );
 };
 

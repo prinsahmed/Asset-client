@@ -18,7 +18,7 @@ const Feature = () => {
                     <CardAnimation
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        delay={0.1}
+                        transition={{ duration: .5, delay: 0.2 }}
                         className="bg-white p-8 rounded-xl  hover:shadow-2xl transition duration-400">
                         <div className="text-indigo-500 text-5xl mb-4">📊</div>
                         <h3 className="text-xl font-semibold mb-2">Dashboard Overview</h3>
@@ -29,7 +29,7 @@ const Feature = () => {
                     <CardAnimation
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        delay={0}
+                        transition={{ duration: .5, delay: 0.4 }}
                         className="bg-white p-8 rounded-xl  hover:shadow-2xl transition duration-400">
                         <div className="text-indigo-500 text-5xl mb-4">🛰️</div>
                         <h3 className="text-xl font-semibold mb-2">Real-time Tracking</h3>
@@ -40,7 +40,7 @@ const Feature = () => {
                     <CardAnimation
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        delay={0.1}
+                        transition={{ duration: .5, delay: 0.6 }}
                         className="bg-white p-8 rounded-xl  hover:shadow-2xl transition duration-400">
                         <div className="text-indigo-500 text-5xl mb-4">🔒</div>
                         <h3 className="text-xl font-semibold mb-2">Secure Access</h3>

@@ -3,14 +3,15 @@ import { motion } from "motion/react"
 
 
 
-const CardAnimation = ({ children, delay, className, initial, whileInView}) => {
+const CardAnimation = ({ children, transition, className, initial, whileInView, animate }) => {
     return (
         <motion.div
             initial={initial}
             whileInView={whileInView}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: delay }}
-            className = {className}
+            transition={transition}
+            animate={animate}
+            className={className}
 
         >
             {children}

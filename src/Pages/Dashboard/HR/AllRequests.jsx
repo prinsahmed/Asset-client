@@ -3,6 +3,11 @@ import React, { useContext } from 'react';
 import { useAxios } from '../../../Hooks/Api/useAxios';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../../Context/Context';
+import CardAnimation from '../../../Components/Animations/CardAnimation';
+import Lottie from 'lottie-react';
+import loadingAnimation from '../../../assets/Gears Lottie Animation.json'
+
+
 
 const AllRequests = () => {
     const axiosSecure = useAxios();
@@ -20,13 +25,18 @@ const AllRequests = () => {
 
 
     if (isLoading) {
-        return <span className="loading loading-spinner loading-xl"></span>;
+        return <div className=' h-dvh flex justify-center items-center '>
+            <Lottie style={{ width: 400, height: 400 }} animationData={loadingAnimation} loop={true} />
+        </div>
     }
 
 
-    const handleApproved = (id) => {
-        const requestStatus = { requestStatus: 'approved' }
-        axiosSecure.put(`/asset-approval/${id}`, requestStatus)
+    const handleApproved = (id, productId) => {
+        const update = {
+            requestStatus: 'approved',
+            productId: productId
+        }
+        axiosSecure.put(`/asset-approval/${id}`, update)
             .then(res => {
                 if (res.data.modifiedCount === 1) {
                     Swal.fire({
@@ -63,18 +73,22 @@ const AllRequests = () => {
 
 
     return (
-        <div className="p-6 bg-base-200 min-h-screen">
-            <div className="bg-base-100 rounded-xl shadow-lg p-4">
+        <CardAnimation
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0 }}
+            className="p-6  min-h-screen ">
 
-                {/* Header */}
-                <div className=" mb-4">
-                    <h2 className="text-xl font-semibold">Employee Asset Requests</h2>
-                </div>
+            <div className=" mb-1">
+                <h2 className="text-xl font-semibold"> Asset Requests</h2>
+            </div>
+            <div className="bg-base-100 rounded-lg  shadow-sm ">
+
 
                 {/* Table */}
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto rounded-lg">
                     <table className="table table-zebra w-full">
-                        <thead>
+                        <thead className='bg-gray-200 text-gray-700 '>
                             <tr>
                                 <th>Requester</th>
                                 <th>Asset</th>
@@ -101,13 +115,16 @@ const AllRequests = () => {
                                         <td>{ele.productName}</td>
                                         <td>{ele.productType}</td>
                                         <td>{ele.companyName}</td>
-                                        <td>{ele.requestDate}</td>
-                                        <td>{ele.approvalDate}</td>
+                                        <td>{new Date(ele.requestDate).toLocaleDateString()}</td>
+                                        {ele?.approvalDate
+                                            ? new Date(ele.approvalDate).toLocaleDateString()
+                                            : "Not Approved Yet"}
+
                                         <td>
                                             <span className="badge badge-warning">{ele.requestStatus}</span>
                                         </td>
                                         <td className="flex gap-2 justify-center">
-                                            <button onClick={() => handleApproved(ele._id)} className="btn btn-success btn-xs">Approve</button>
+                                            <button onClick={() => handleApproved(ele._id, ele.productId)} className="btn btn-success btn-xs">Approve</button>
                                             <button onClick={() => handleReject(ele._id)} className="btn btn-error btn-xs">Reject</button>
                                         </td>
                                     </tr>
@@ -118,7 +135,7 @@ const AllRequests = () => {
                 </div>
 
             </div>
-        </div>
+        </CardAnimation>
     );
 };
 

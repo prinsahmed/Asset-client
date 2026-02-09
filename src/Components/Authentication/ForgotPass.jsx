@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../Context/Context';
 import Swal from 'sweetalert2';
+import CardAnimation from '../Animations/CardAnimation';
 
 const ForgotPass = () => {
 
@@ -24,11 +25,15 @@ const ForgotPass = () => {
     }
 
     return (
-        <div>
-            <div className="hero  min-h-screen">
+        <CardAnimation
+            initial={{ opacity: 0, y: -15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: .3 }}
+        >
+            <div className="hero bg-white min-h-screen">
                 <div className="hero-content flex-col lg:flex-row-reverse">
 
-                    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+                    <div className="card bg-white w-full max-w-sm shrink-0 shadow-2xl">
                         <div className="card-body">
                             <form onSubmit={handleSubmit(onSubmit)}>
                                 <label className="label">Email</label>
@@ -39,7 +44,7 @@ const ForgotPass = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </CardAnimation>
     );
 };
 

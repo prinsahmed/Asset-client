@@ -5,11 +5,12 @@ import Swal from 'sweetalert2';
 import DatePicker from 'react-datepicker';
 import { AuthContext } from '../../../Context/Context';
 import axios from 'axios';
+import CardAnimation from '../../../Components/Animations/CardAnimation';
+
 
 
 const AddAsset = () => {
     const { register, handleSubmit } = useForm();
-    const [image, setImage] = useState();
     const [selectedDate, setSelectedDate] = useState(new Date());
     const axiosSecure = useAxios();
     const { user } = useContext(AuthContext)
@@ -21,24 +22,25 @@ const AddAsset = () => {
         formData.append('image', imageFile)
 
 
-        const addedProduct = {
-            productName: data.productName,
-            companyName: data.companyName,
-            hrEmail: user?.email,
-            date: selectedDate,
-            productImage: image,
-            productType: data.productType,
-            productQuantity: data.productQuantity
-        }
 
 
 
-        axiosSecure.post('/add-product', addedProduct)
+
+        axios.post(`https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_IMAGE_FILE_KEY}`, formData)
             .then(res => {
-                axios.post(`https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_IMAGE_FILE_KEY}`, formData)
-                    .then(res => {
-                        setImage(res.data.data.display_url);
-                    })
+
+                const addedProduct = {
+                    productName: data.productName,
+                    companyName: data.companyName,
+                    hrEmail: user?.email,
+                    date: selectedDate,
+                    productImage: res.data.data.display_url,
+                    productType: data.productType,
+                    productQuantity: parseInt(data.productQuantity)
+                }
+
+                axiosSecure.post('/add-product', addedProduct)
+                    .catch(err => console.log(err.message))
 
                 if (res) {
                     Swal.fire({
@@ -57,15 +59,19 @@ const AddAsset = () => {
 
 
     return (
-        <div className="min-h-screen bg-gray-100 p-6">
+        <CardAnimation
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{duration:0.3, delay:0}}
+            className="min-h-screen pt-6">
             <div className="max-w-7xl mx-auto">
 
 
-                <h1 className="text-3xl font-bold mb-6 text-gray-800">
+                <h1 className="text-xl font-semibold mb-1 text-gray-800">
                     Add New Product
                 </h1>
 
-                <div className="bg-white shadow-xl rounded-2xl p-8">
+                <div className="bg-white  rounded-lg p-2">
                     <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
 
@@ -147,7 +153,7 @@ const AddAsset = () => {
                             <input
                                 type="email"
                                 defaultValue={user?.email}
-                                readOnly
+                                disabled
                                 {...register('email')}
                                 required
                                 className="input input-bordered w-full"
@@ -166,7 +172,7 @@ const AddAsset = () => {
                 </div>
 
             </div>
-        </div>
+        </CardAnimation>
 
     );
 };

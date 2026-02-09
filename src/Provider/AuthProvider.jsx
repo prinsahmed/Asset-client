@@ -3,15 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { auth } from '../Firebase/firebase';
 import { AuthContext } from '../Context/Context';
 import { useAxios } from '../Hooks/Api/useAxios';
-import { useQuery } from '@tanstack/react-query';
+
 
 
 const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);
-    const [roleUser, setRoleUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [userCompany, setUserCompany] = useState(null)
+    const [userData, setUserData] = useState(null)
     const axiosSecure = useAxios();
 
 
@@ -20,7 +19,7 @@ const AuthProvider = ({ children }) => {
     }
 
     useEffect(() => {
-
+        setLoading(true)
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser)
             if (currentUser?.email) {
@@ -34,30 +33,22 @@ const AuthProvider = ({ children }) => {
                         else {
                             localStorage.removeItem('access-token');
                         }
-                        
-                        axiosSecure.get(`user-role?email=${currentUser?.email}`)
-                            .then((res) => {
-                                setRoleUser(res.data)
 
-                                axiosSecure.get(`/user-company?email=${currentUser?.email}`)
-                                    .then(res => {
-                                        setUserCompany(res.data)
-                                        setLoading(false)
-                                    })
-                                    .catch(err => {
-                                        console.log("Company Fetch Error:", err.message)
-                                        setLoading(false)
-                                    })
-
+                        axiosSecure.get(`/user-data?email=${currentUser?.email}`)
+                            .then(res => {
+                                setUserData(res.data)
+                                setLoading(false)
                             })
-                            .catch(err => console.log(err.message))
+                            .catch(err => {
+                                console.log("Company Fetch Error:", err.message)
+                                setLoading(false)
+                            })
+
                     })
 
 
             }
-            else {
-                setRoleUser(null);
-            }
+
         })
 
         return () => unsubscribe;
@@ -73,19 +64,19 @@ const AuthProvider = ({ children }) => {
     }
 
 
-    const userData = {
+
+    const userInfo = {
         signInEmail,
         signOutCurrentUser,
         passResetEmail,
         user,
-        roleUser,
         loading,
-        userCompany
+        userData
     }
 
     return (
 
-        <AuthContext value={userData}>
+        <AuthContext value={userInfo}>
             {children}
         </AuthContext>
 

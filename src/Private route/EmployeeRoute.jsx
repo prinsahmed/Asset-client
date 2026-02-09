@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../Context/Context';
 
 const EmployeeRoute = ({ children }) => {
-    const { user, loading, roleUser } = useContext(AuthContext);
+    const { user, userData } = useContext(AuthContext);
     
 
-    if (loading) return <span className="loading loading-spinner loading-xl"></span>
 
-    if (!user || roleUser !== 'Employee') {
+
+    if (!user || userData?.role !== 'Employee') {
         return <Navigate to='/' replace></Navigate>
     }
     return (

@@ -15,7 +15,8 @@ const About = () => {
                     <CardAnimation
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        delay={0} className="bg-white shadow-[0px_8px_24px_rgba(149,157,165,0.2)] rounded-xl p-6 ml-0">
+                        transition={{ duration: .8, delay: 0.1 }}
+                        className="bg-white shadow-[0px_8px_24px_rgba(149,157,165,0.2)] rounded-xl p-6 ml-0">
                         <div className='flex items-center gap-x-1'>
                             <img className='w-12' src={trackImg} alt="tracking asset" />
                             <h3 className="font-semibold text-lg">Centralized Asset Tracking</h3>
@@ -26,7 +27,7 @@ const About = () => {
                     <CardAnimation
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        delay={0.1} className="bg-white shadow-[0px_8px_24px_rgba(149,157,165,0.2)] rounded-xl p-6 ml-5">
+                        transition={{ duration: .8, delay: 0.2 }} className="bg-white shadow-[0px_8px_24px_rgba(149,157,165,0.2)] rounded-xl p-6 ml-5">
                         <div className='flex items-center gap-x-2'>
                             <img className='w-10' src={coachImg} alt="smart management" />
                             <h3 className="font-semibold text-lg">Smart Employee & HR Management</h3>
@@ -37,7 +38,7 @@ const About = () => {
                     <CardAnimation
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        delay={0.2}
+                        transition={{ duration: .8, delay: 0.3 }}
                         className="bg-white shadow-[0px_8px_24px_rgba(149,157,165,0.2)] rounded-xl p-6 ml-10">
                         <div className='flex items-center gap-x-2'>
                             <img className='w-10' src={increaseImg} alt="productivity" />
@@ -49,7 +50,7 @@ const About = () => {
                     <CardAnimation
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        delay={0.3}
+                        transition={{ duration: .8, delay: 0.4 }}
                         className="bg-white shadow-[0px_8px_24px_rgba(149,157,165,0.2)] rounded-xl p-6 ml-14">
                         <div className='flex items-center gap-x-2'>
                             <img className='w-10' src={scalableImg} alt="scalable" />

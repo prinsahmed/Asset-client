@@ -20,6 +20,9 @@ import LoginRoute from "../Private route/LoginRoute";
 import HRroute from "../Private route/HRroute";
 import EmployeeRoute from "../Private route/EmployeeRoute";
 import DashBoardIndex from "../Components/Dashboard/DashBoardIndex";
+import MyProfileHR from "../Pages/Dashboard/HR/MyProfileHR";
+import PackageHR from "../Pages/Dashboard/HR/PackageHR";
+import MyProfileEmplyee from "../Pages/Dashboard/Employee/MyProfileEmplyee";
 
 
 
@@ -64,7 +67,7 @@ export const router = createBrowserRouter([
         children:
             [{
                 index: true,
-                element: <DashBoardIndex/>
+                element: <DashBoardIndex />
             },
             {
                 path: 'asset-list',
@@ -90,9 +93,17 @@ export const router = createBrowserRouter([
                 path: 'employee-requests',
                 element: <HRroute><EmployeeRequest /></HRroute>
             },
-            
+            {
+                path: 'HR-profile',
+                element: <HRroute><MyProfileHR /></HRroute>
+            },
+            {
+                path: 'HR-package',
+                element: <HRroute><PackageHR /></HRroute>
+            },
+
             // employee dash components
-            {                                                            
+            {
                 path: 'request-asset',
                 element: <EmployeeRoute><EmployeeAssetsRequest /></EmployeeRoute>
             },
@@ -102,7 +113,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'employee-asset',
-                element: <EmployeeRoute><EmployeeAssets/></EmployeeRoute>
+                element: <EmployeeRoute><EmployeeAssets /></EmployeeRoute>
+            },
+            {
+                path:'employee-profile',
+                element:<EmployeeRoute><MyProfileEmplyee/></EmployeeRoute>
             }
             ]
     }

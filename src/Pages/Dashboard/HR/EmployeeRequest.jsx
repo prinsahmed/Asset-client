@@ -3,10 +3,16 @@ import { useAxios } from '../../../Hooks/Api/useAxios';
 import { AuthContext } from '../../../Context/Context';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
+import CardAnimation from '../../../Components/Animations/CardAnimation';
+import Lottie from 'lottie-react';
+import loadingAnimation from '../../../assets/Gears Lottie Animation.json'
+
+
+
 
 const EmployeeRequest = () => {
     const axiosSecure = useAxios();
-    const { user, userCompany } = useContext(AuthContext)
+    const { user, userData } = useContext(AuthContext)
 
 
     const { data: assets = [], isLoading, refetch } = useQuery({
@@ -21,23 +27,25 @@ const EmployeeRequest = () => {
 
 
     if (isLoading) {
-        return <span className="loading loading-spinner loading-xl"></span>;
+        return <div className=' h-dvh flex justify-center items-center '>
+            <Lottie style={{ width: 400, height: 400 }} animationData={loadingAnimation} loop={true} />
+        </div>
     }
 
     const handleApproved = (id, employeeEmail) => {
 
         const update = {
             status: 'approved',
-            companyName: userCompany
+            companyName: userData.companyName
 
         }
 
-        
-        
-        
+
+
+
         axiosSecure.put(`/employee-approval/${id}`, update)
-        .then(res => {
-            
+            .then(res => {
+
                 if (res.data.modifiedCount === 1) {
 
                     Swal.fire({
@@ -47,7 +55,7 @@ const EmployeeRequest = () => {
                         showConfirmButton: false,
                         timer: 1000
                     });
-                    
+
                     refetch()
                 }
             })
@@ -55,10 +63,10 @@ const EmployeeRequest = () => {
 
 
 
-            axiosSecure.put(`/employee-company?email=${employeeEmail}`, {companyName:userCompany})
-                .catch(err => console.log(err.message))
+        axiosSecure.put(`/employee-company?email=${employeeEmail}`, { companyName: userData.companyName })
+            .catch(err => console.log(err.message))
 
-        }
+    }
 
     const handleReject = (id) => {
         const status = { status: 'rejected' }
@@ -81,19 +89,24 @@ const EmployeeRequest = () => {
 
 
     return (
-        <div className="p-6 bg-base-200 min-h-screen">
-            <div className="bg-base-100 rounded-xl shadow-lg p-4">
+        <CardAnimation
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0 }}
+            className="p-6 min-h-screen ">
 
-                {/* Header */}
-                <div className=" mb-4">
-                    <h2 className="text-xl font-semibold">Employee Requests</h2>
-                </div>
+            <div className=" mb-1">
+                <h2 className="text-xl font-semibold">Employee Requests</h2>
+            </div>
+            <div className="bg-base-200 rounded-lg shadow-lg">
+
 
                 {/* Table */}
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto rounded-lg">
                     <table className="table table-zebra w-full">
-                        <thead>
+                        <thead className='bg-gray-200 text-gray-700 '>
                             <tr>
+                                <th>Image</th>
                                 <th>Requester</th>
                                 <th>Company</th>
                                 <th>Request Date</th>
@@ -109,6 +122,7 @@ const EmployeeRequest = () => {
                             {
                                 assets?.map(ele => {
                                     return <tr key={ele._id} >
+                                        <td><img className='w-10 h-10 rounded-full' src={ele.employeeImage} alt={ele.employeeName} /></td>
                                         <td>
                                             <div>
 
@@ -116,8 +130,8 @@ const EmployeeRequest = () => {
                                             </div>
                                         </td>
                                         <td>{ele.companyName}</td>
-                                        <td>{ele.affiliationDate}</td>
-                                        <td>{ele.approvalDate}</td>
+                                        <td>{new Date(ele.affiliationDate).toLocaleDateString()}</td>
+                                        <td>{new Date(ele.approvalDate).toLocaleDateString()}</td>
                                         <td>
                                             <span className="badge badge-warning">{ele.status}</span>
                                         </td>
@@ -141,7 +155,7 @@ const EmployeeRequest = () => {
                 </div>
 
             </div>
-        </div>
+        </CardAnimation>
     );
 };
 

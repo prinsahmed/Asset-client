@@ -6,6 +6,8 @@ import { AuthContext } from '../../Context/Context';
 import { Link } from 'react-router';
 import Swal from 'sweetalert2';
 import { useAxios } from '../../Hooks/Api/useAxios';
+import CardAnimation from '../Animations/CardAnimation';
+import regImage from '../../assets/Sign up-pana.png'
 
 
 const AuthEmployee = () => {
@@ -21,7 +23,7 @@ const AuthEmployee = () => {
             email: data.email,
             password: data.password,
             dateOfBirth: selectedDate,
-            
+
 
         }
 
@@ -31,8 +33,8 @@ const AuthEmployee = () => {
                 if (res) {
                     axiosSecure.post('/user-employee', EmplyeeData)
                         .then(res => {
-                            if (res) {
-                                console.log(res);
+                            console.log(res);
+                            if (res.data.insertedId) {
                                 Swal.fire({
                                     position: "top-end",
                                     icon: "success",
@@ -54,18 +56,20 @@ const AuthEmployee = () => {
 
 
     return (
-        <div>
-            <div className="hero  min-h-screen">
-                <div className="hero-content flex-col lg:flex-row-reverse">
-                    <div className="text-center lg:text-left">
-                        <h1 className="text-5xl font-bold">Login now!</h1>
-                        <p className="py-6">
-                            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                            quasi. In deleniti eaque aut repudiandae et a id nisi.
-                        </p>
+        <CardAnimation
+            initial={{ opacity: 0, y: -15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: .3 }}
+        >
+            <div className=" bg-white min-h-screen">
+                <div className=" flex items-center gap-x-16 justify-center ">
+                    <div>
+                        <img className='w-[40rem]' src={regImage} alt="Sign up-pana" />
                     </div>
-                    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+
+                    <div className="card bg-base-100 w-full max-w-sm shrink-0 ">
                         <div className="card-body">
+                            <h2 className='text-2xl text-[#90CAF9] font-bold'>Registration</h2>
                             <form onSubmit={handleSubmit(onSubmit)}>
                                 <fieldset className="fieldset">
                                     <label className="label">Name</label>
@@ -88,7 +92,6 @@ const AuthEmployee = () => {
 
                                     <label className='label mt-2'>Date of Birth</label>
                                     <DatePicker showIcon selected={selectedDate} onChange={setSelectedDate} />
-                                    <div><Link to='/auth/forget-pass' className="link link-hover">Forgot password?</Link></div>
                                     <button className="btn btn-neutral mt-4">Register</button>
                                 </fieldset>
                             </form>
@@ -96,7 +99,7 @@ const AuthEmployee = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </CardAnimation>
     );
 };
 

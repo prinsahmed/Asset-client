@@ -7,12 +7,14 @@ import { AuthContext } from '../../Context/Context';
 import Swal from 'sweetalert2';
 import { useAxios } from '../../Hooks/Api/useAxios';
 import axios from 'axios';
+import CardAnimation from '../Animations/CardAnimation';
+import regImage from '../../assets/Filing system-pana.png'
+
 
 const AuthHR = () => {
 
     const { signInEmail } = useContext(AuthContext);
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [image, setImage] = useState();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const axiosSecure = useAxios();
 
@@ -23,60 +25,52 @@ const AuthHR = () => {
         formData.append('image', imageFile)
 
 
-
-
-        const HRData = {
-            name: data.name,
-            companyName: data.companyName,
-            companyLogo: image,
-            email: data.email,
-            password: data.password,
-            dateOfBirth: selectedDate
-
-        }
-
         signInEmail(data.email, data.password)
-            .then(res => {
-                if (res) {
+            .then(() => {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Successfully registered",
+                    showConfirmButton: false,
+                    timer: 1000
+                });
 
-                    axios.post(`https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_IMAGE_FILE_KEY}`, formData)
-                        .then(res => {
-                            setImage(res.data.data.display_url);
-                        })
+                axios.post(`https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_IMAGE_FILE_KEY}`, formData)
+                    .then(res => {
 
-                    axiosSecure.post('/user-HR', HRData)
-                        .then(res => {
+                        const HRData = {
+                            name: data.name,
+                            companyName: data.companyName,
+                            companyLogo: res.data.data.display_url,
+                            email: data.email,
+                            password: data.password,
+                            dateOfBirth: selectedDate
 
-                            if (res) {
+                        }
 
-                                Swal.fire({
-                                    position: "top-end",
-                                    icon: "success",
-                                    title: "Successfully registered",
-                                    showConfirmButton: false,
-                                    timer: 1000
-                                });
-                            }
-                        })
-                }
+                        axiosSecure.post('/user-HR', HRData)
+
+                    })
+                    .catch(error => console.log(error.message))
             })
-            .catch(error => console.log(error.message))
+
 
     }
     return (
 
-        <div>
-            <div className="hero  min-h-screen">
-                <div className="hero-content flex-col lg:flex-row-reverse">
-                    <div className="text-center lg:text-left">
-                        <h1 className="text-5xl font-bold">Login now!</h1>
-                        <p className="py-6">
-                            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                            quasi. In deleniti eaque aut repudiandae et a id nisi.
-                        </p>
+        <CardAnimation
+            initial={{ opacity: 0, y: -15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: .3 }}
+        >
+            <div className="hero bg-white min-h-screen">
+                <div className="flex items-center gap-x-16 justify-center ">
+                    <div>
+                        <img className='w-[45rem]' src={regImage} alt="Filing system-pan" />
                     </div>
-                    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+                    <div className="card bg-base-100 w-full max-w-sm shrink-0 ">
                         <div className="card-body">
+                            <h2 className='text-2xl text-[#90CAF9] font-bold'>Registration</h2>
                             <form onSubmit={handleSubmit(onSubmit)}>
                                 <fieldset className="fieldset space-y-1">
                                     <label className="label">Name</label>
@@ -105,7 +99,7 @@ const AuthHR = () => {
 
                                     <label className='label mt-2'>Date of Birth</label>
                                     <DatePicker showIcon selected={selectedDate} onChange={setSelectedDate} />
-                                    <div><Link to='/auth/forget-pass' className="link link-hover">Forgot password?</Link></div>
+
                                     <button className="btn btn-neutral mt-4">Register</button>
                                 </fieldset>
                             </form>
@@ -113,7 +107,7 @@ const AuthHR = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </CardAnimation>
     );
 };
 

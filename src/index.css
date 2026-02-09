@@ -12,6 +12,10 @@ body{
 
 .nav li .active{
     color: black;
+    background-color: white;
+    /* background-color: rgba(241, 241, 241, 0.822); */
+    border-radius: 30px 1px 1px 30px ;
+   
 }
 .nav2 li .active{
     color: black;

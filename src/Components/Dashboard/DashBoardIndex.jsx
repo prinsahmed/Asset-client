@@ -3,15 +3,15 @@ import { AuthContext } from '../../Context/Context';
 import { Navigate } from 'react-router';
 
 const DashBoardIndex = () => {
-    const { user, roleUser, loading } = useContext(AuthContext)
+    const { userData, loading } = useContext(AuthContext)
 
     if (loading) return 
 
-    if (roleUser === 'HR') {
+    if (userData?.role === 'HR') {
         return <Navigate to="asset-list" replace />;
     }
 
-    if (roleUser === 'Employee') {
+    if (userData?.role === 'Employee') {
         return <Navigate to="employee-asset" replace />;
     }
 

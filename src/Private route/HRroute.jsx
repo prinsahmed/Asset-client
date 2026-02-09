@@ -3,11 +3,11 @@ import { AuthContext } from '../Context/Context';
 import { Navigate } from 'react-router';
 
 const HRroute = ({ children }) => {
-    const { roleUser, user, loading } = useContext(AuthContext)
+    const { userData, user } = useContext(AuthContext)
 
-    if (loading) return <span className="loading loading-spinner loading-xl"></span>
+ console.log(userData.role);
 
-    if (!user || roleUser !== 'HR') {
+    if (!user || userData?.role !== 'HR') {
         return <Navigate to='/' replace></Navigate>
     }
 

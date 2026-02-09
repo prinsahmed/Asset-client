@@ -36,7 +36,7 @@ const Statistics = () => {
                     <CardAnimation
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        delay={0.1}
+                        transition={{ duration: .5, delay: 0.2 }}
 
                         className="bg-white p-8 rounded-xl shadow-[0px_8px_24px_rgba(149,157,165,0.2)]">
                         <p className="text-gray-600 italic">"AssetVerse transformed how we manage our assets. Tracking has never been easier!"</p>
@@ -47,7 +47,7 @@ const Statistics = () => {
                     <CardAnimation
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        delay={0.2}
+                        transition={{ duration: .5, delay: 0.4 }}
                         className="bg-white p-8 rounded-xl shadow-[0px_8px_24px_rgba(149,157,165,0.2)]">
                         <p className="text-gray-600 italic">"The real-time updates and dashboard insights save our team countless hours every week."</p>
                         <h4 className="mt-4 font-semibold text-gray-900">— Sarah Lee, Operations Manager, FinAsset</h4>
@@ -57,7 +57,7 @@ const Statistics = () => {
                     <CardAnimation
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        delay={0.3}
+                        transition={{ duration: .5, delay: 0.6 }}
                         className="bg-white p-8 rounded-xl shadow-[0px_8px_24px_rgba(149,157,165,0.2)]">
                         <p className="text-gray-600 italic">"Secure and easy to use. AssetVerse is a must-have for any growing business."</p>
                         <h4 className="mt-4 font-semibold text-gray-900">— Michael Chen, CEO, GlobalAssets</h4>
