@@ -53,9 +53,6 @@ const EmployeeAssets = () => {
 
             <div className="flex justify-between items-center mb-5">
                 <h2 className="text-xl font-semibold mb-1 text-gray-800">Assigned Assets</h2>
-                <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-                    Print
-                </button>
             </div>
 
 

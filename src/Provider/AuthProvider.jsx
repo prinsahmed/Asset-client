@@ -11,6 +11,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [userData, setUserData] = useState(null)
+    const [reload, setReload] = useState(false)
     const axiosSecure = useAxios();
 
 
@@ -19,11 +20,12 @@ const AuthProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        setLoading(true)
+       
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser)
-            if (currentUser?.email) {
 
+            if (currentUser?.email) {
+                
                 axiosSecure.post('jwt', { email: currentUser?.email })
                     .then((res) => {
 
@@ -51,9 +53,9 @@ const AuthProvider = ({ children }) => {
 
         })
 
-        return () => unsubscribe;
+        return () => unsubscribe()
 
-    }, [axiosSecure])
+    }, [axiosSecure, reload])
 
     function passResetEmail(email) {
         return sendPasswordResetEmail(auth, email);
@@ -64,14 +66,14 @@ const AuthProvider = ({ children }) => {
     }
 
 
-
     const userInfo = {
         signInEmail,
         signOutCurrentUser,
         passResetEmail,
         user,
         loading,
-        userData
+        userData,
+        setReload
     }
 
     return (

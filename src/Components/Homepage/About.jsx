@@ -60,7 +60,7 @@ const About = () => {
                     </CardAnimation>
 
                 </div>
-                <div className='shadow-[0px_8px_24px_rgba(149,157,165,0.2)] p-6'>
+                <div className='shadow-[0px_8px_24px_rgba(149,157,165,0.2)] rounded-xl p-6'>
                     <ul>
                         <h2 className='text-lg font-semibold'>Clean & Professional</h2>
                         <li className='text-sm text-gray-400 '>At AssetVerse, we empower organizations with smarter tools to manage their assets, employees, and operations — all from a single, secure platform.</li>

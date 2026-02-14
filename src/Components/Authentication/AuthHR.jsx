@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import NavBar from '../Navigation/NavBar';
-import { Link, Outlet } from 'react-router';
+import { Link, Outlet, useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import DatePicker from 'react-datepicker';
 import { AuthContext } from '../../Context/Context';
@@ -17,6 +17,8 @@ const AuthHR = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const { register, handleSubmit, formState: { errors } } = useForm();
     const axiosSecure = useAxios();
+    const navigate = useNavigate()
+
 
     function onSubmit(data) {
 
@@ -47,7 +49,7 @@ const AuthHR = () => {
                             dateOfBirth: selectedDate
 
                         }
-
+                        navigate('/dash')
                         axiosSecure.post('/user-HR', HRData)
 
                     })
@@ -63,10 +65,10 @@ const AuthHR = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: .3 }}
         >
-            <div className="hero bg-white min-h-screen">
+            <div className="hero bg-white">
                 <div className="flex items-center gap-x-16 justify-center ">
                     <div>
-                        <img className='w-[45rem]' src={regImage} alt="Filing system-pan" />
+                        <img className='w-[41rem]' src={regImage} alt="Filing system-pan" />
                     </div>
                     <div className="card bg-base-100 w-full max-w-sm shrink-0 ">
                         <div className="card-body">

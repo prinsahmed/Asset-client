@@ -30,17 +30,14 @@ const ForgotPass = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: .3 }}
         >
-            <div className="hero bg-white min-h-screen">
-                <div className="hero-content flex-col lg:flex-row-reverse">
-
-                    <div className="card bg-white w-full max-w-sm shrink-0 shadow-2xl">
-                        <div className="card-body">
-                            <form onSubmit={handleSubmit(onSubmit)}>
-                                <label className="label">Email</label>
-                                <input type="email" {...register('email')} required className="input" placeholder="Email" />
-                                <button className="btn btn-neutral mt-4">Send a code</button>
-                            </form>
-                        </div>
+            <div className=" flex justify-center items-center bg-white min-h-screen">
+                <div className="rounded-lg bg-white w-full max-w-sm shrink-0 shadow-2xl">
+                    <div className="card-body">
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <label className="label">Email</label>
+                            <input type="email" {...register('email')} required className="input" placeholder="Email" />
+                            <button className="btn btn-neutral mt-4">Send a code</button>
+                        </form>
                     </div>
                 </div>
             </div>

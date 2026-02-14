@@ -112,6 +112,7 @@ const EmployeeRequest = () => {
                                 <th>Request Date</th>
                                 <th>Approval Date</th>
                                 <th>Status</th>
+                                <th>Actions</th>
 
                             </tr>
                         </thead>
@@ -135,7 +136,7 @@ const EmployeeRequest = () => {
                                         <td>
                                             <span className="badge badge-warning">{ele.status}</span>
                                         </td>
-                                        <td className="flex gap-2 justify-center">
+                                        <td className="flex gap-2 ">
                                             <button onClick={() => {
                                                 handleApproved(ele._id, ele.employeeEmail)
 

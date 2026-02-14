@@ -23,6 +23,8 @@ import DashBoardIndex from "../Components/Dashboard/DashBoardIndex";
 import MyProfileHR from "../Pages/Dashboard/HR/MyProfileHR";
 import PackageHR from "../Pages/Dashboard/HR/PackageHR";
 import MyProfileEmplyee from "../Pages/Dashboard/Employee/MyProfileEmplyee";
+import PaymentSuccess from "../Pages/Payment/PaymentSuccess";
+
 
 
 
@@ -116,9 +118,18 @@ export const router = createBrowserRouter([
                 element: <EmployeeRoute><EmployeeAssets /></EmployeeRoute>
             },
             {
-                path:'employee-profile',
-                element:<EmployeeRoute><MyProfileEmplyee/></EmployeeRoute>
-            }
+                path: 'employee-profile',
+                element: <EmployeeRoute><MyProfileEmplyee /></EmployeeRoute>
+            },
+                // payment
             ]
+    },
+    {
+        path: 'payment-success',
+        element: <LoginRoute>
+            <HRroute>
+                <PaymentSuccess />
+            </HRroute>
+        </LoginRoute>
     }
 ])

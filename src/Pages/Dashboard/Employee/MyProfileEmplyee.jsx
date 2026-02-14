@@ -38,7 +38,7 @@ const MyProfileEmplyee = () => {
                                 Swal.fire({
                                     position: "top-end",
                                     icon: "success",
-                                    title: "Successfully registered",
+                                    title: "Successfully Updated",
                                     showConfirmButton: false,
                                     timer: 1000
                                 });

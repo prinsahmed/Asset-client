@@ -117,11 +117,6 @@ const DashboardLayout = () => {
                                             <span className="is-drawer-close:hidden">Join as Employee</span></NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to='/dash/my-team'>
-                                            <FaList />
-                                            <span className="is-drawer-close:hidden">My Team</span></NavLink>
-                                    </li>
-                                    <li>
                                         <NavLink to='/dash/employee-profile'>
                                             <ImProfile />
                                             <span className="is-drawer-close:hidden">My Profile</span>

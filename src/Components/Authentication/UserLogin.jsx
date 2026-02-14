@@ -34,10 +34,10 @@ const UserLogin = () => {
             initial={{ opacity: 0, y: -15 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: .3 }}
-            className='bg-white  h-dvh'>
+            className='bg-white'>
             <div className='flex items-center gap-x-16 justify-center '>
                 <div>
-                    <img className='w-[38rem]' src={regImage} alt="Computer login-rafiki" />
+                    <img className='w-[36rem]' src={regImage} alt="Computer login-rafiki" />
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)} >
                     <fieldset className="fieldset  w-xs  p-4">

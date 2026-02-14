@@ -3,7 +3,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../Context/Context';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import { useAxios } from '../../Hooks/Api/useAxios';
 import CardAnimation from '../Animations/CardAnimation';
@@ -15,6 +15,7 @@ const AuthEmployee = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { signInEmail } = useContext(AuthContext);
     const axiosSecure = useAxios();
+    const navigate = useNavigate()
 
     function onSubmit(data) {
 
@@ -26,7 +27,6 @@ const AuthEmployee = () => {
 
 
         }
-
 
         signInEmail(data.email, data.password)
             .then(res => {
@@ -42,6 +42,7 @@ const AuthEmployee = () => {
                                     showConfirmButton: false,
                                     timer: 1000
                                 });
+                                navigate('/dash')
                             }
                         })
 
@@ -61,10 +62,10 @@ const AuthEmployee = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: .3 }}
         >
-            <div className=" bg-white min-h-screen">
+            <div className=" bg-white">
                 <div className=" flex items-center gap-x-16 justify-center ">
                     <div>
-                        <img className='w-[40rem]' src={regImage} alt="Sign up-pana" />
+                        <img className='w-[39rem]' src={regImage} alt="Sign up-pana" />
                     </div>
 
                     <div className="card bg-base-100 w-full max-w-sm shrink-0 ">
