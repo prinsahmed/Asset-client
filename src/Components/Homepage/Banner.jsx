@@ -23,7 +23,7 @@ const Banner = () => {
             opacity: [0, 1, 1, 0],
             y: [15, 0, 0, -15],
             transition: {
-                duration: 4,
+                duration: 3,
                 repeat: Infinity,
                 times: [0, 0.1, 0.9, 1],
                 ease: "easeInOut",

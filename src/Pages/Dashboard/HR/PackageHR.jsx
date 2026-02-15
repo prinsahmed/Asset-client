@@ -1,78 +1,174 @@
-import React from 'react';
-import { Home, BarChart2, Users, Settings } from "lucide-react";
+import React, { useContext } from 'react';
+import { Home, BarChart2, Users, Settings, Zap, Check, Star, Shield, Crown } from "lucide-react";
 import { motion } from "framer-motion";
-
+import loadingAnimation from '../../../assets/Gears Lottie Animation.json'
+import { useAxios } from '../../../Hooks/Api/useAxios';
+import { AuthContext } from '../../../Context/Context';
+import { useQuery } from '@tanstack/react-query';
+import Lottie from 'lottie-react';
+import CardAnimation from '../../../Components/Animations/CardAnimation';
 
 const PackageHR = () => {
+    const axiosSecure = useAxios();
+    const { user, userData } = useContext(AuthContext);
+
+    const { data: assets = [], isLoading } = useQuery({
+        queryFn: async () => {
+            const res = await axiosSecure.get('/upgrade-package');
+            return res.data;
+        },
+        enabled: userData?.role === 'HR'
+    });
+
+    if (userData?.role !== 'HR') return
+
+    if (isLoading) return <div className='flex justify-center'>
+        <Lottie style={{ width: 200, height: 200 }} animationData={loadingAnimation} loop={true} />
+    </div>
+
+    const Basic = assets[0];
+    const Standard = assets[1];
+    const Premium = assets[2]
+
+    function handleUpgrade(id) {
+
+        const paymentInfo = {
+            id: id,
+            email: user?.email
+        }
+
+        axiosSecure.post('/create-checkout-session', paymentInfo)
+            .then(res => {
+                window.location.href = res.data.url
+            })
+    }
+
+
     return (
-        <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 flex items-center justify-center p-8">
-            <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                
-                className="relative w-full max-w-6xl"
-            >
-                {/* Isometric Container */}
-                <div className="transform-gpu [transform:rotateX(55deg)_rotateZ(45deg)] origin-center">
-                    <div className="grid grid-cols-12 gap-6">
+        <div className="min-h-screen bg-slate-50 py-20 px-6 font-sans antialiased">
+            {/* Header Section */}
+            <div className="max-w-4xl mx-auto text-center mb-16">
+                <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+                    Ready to scale your delivery?
+                </h1>
+                <p className="mt-5 text-lg text-slate-600">
+                    Unlock advanced automation, real-time tracking, and priority support.
+                </p>
+            </div>
 
+            {/* Pricing Grid */}
+            <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
 
-                        {/* Sidebar */}
-                        <div className="col-span-3 bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-2xl shadow-2xl p-6 space-y-6">
-                            <h1 className="text-xl font-semibold tracking-tight">Dashboard</h1>
-                            <nav className="space-y-4 text-indigo-100">
-                                <div className="flex items-center gap-3 font-medium hover:text-white cursor-pointer">
-                                    <Home size={18} /> Overview
-                                </div>
-                                <div className="flex items-center gap-3 font-medium hover:text-white cursor-pointer">
-                                    <BarChart2 size={18} /> Analytics
-                                </div>
-                                <div className="flex items-center gap-3 font-medium hover:text-white cursor-pointer">
-                                    <Users size={18} /> Team
-                                </div>
-                                <div className="flex items-center gap-3 font-medium hover:text-white cursor-pointer">
-                                    <Settings size={18} /> Settings
-                                </div>
-                            </nav>
-                        </div>
-
-
-                        {/* Main Content */}
-                        <div className="col-span-9 grid grid-cols-3 gap-6">
-                            {/* Stat Cards */}
-                            <div className="bg-gradient-to-br from-cyan-400 to-blue-500 text-white rounded-2xl shadow-xl p-6">
-                                <p className="text-sm text-slate-500">Revenue</p>
-                                <p className="text-2xl font-semibold mt-2">$24,300</p>
-                            </div>
-                            <div className="bg-gradient-to-br from-cyan-400 to-blue-500 text-white rounded-2xl shadow-xl p-6">
-                                <p className="text-sm text-slate-500">Users</p>
-                                <p className="text-2xl font-semibold mt-2">1,284</p>
-                            </div>
-                            <div className="bg-gradient-to-br from-cyan-400 to-blue-500 text-white rounded-2xl shadow-xl p-6">
-                                <p className="text-sm text-slate-500">Growth</p>
-                                <p className="text-2xl font-semibold mt-2">+12.4%</p>
-                            </div>
-
-
-                            {/* Activity Card */}
-                            <div className="col-span-3 bg-gradient-to-br from-fuchsia-500 to-pink-500 text-white rounded-2xl shadow-2xl p-6">
-                                <h2 className="text-lg font-semibold mb-4">Recent Activity</h2>
-                                <div className="space-y-3">
-                                    <div className="p-3 rounded-xl bg-white/20 backdrop-blur text-sm text-indigo-100 shadow-sm">
-                                        New user signed up
-                                    </div>
-                                    <div className="p-3 rounded-xl bg-white/20 backdrop-blur text-sm text-indigo-100 shadow-sm">
-                                        Monthly report generated
-                                    </div>
-                                    <div className="p-3 rounded-xl bg-white/20 backdrop-blur text-sm text-indigo-100 shadow-sm">
-                                        Server backup completed
-                                    </div>
-                                </div>
-                            </div>
+                {/* BASIC PACKAGE */}
+                <CardAnimation
+                    initial={{ opacity: 0, y: -15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: .2 }}
+                    className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
+                    <div className="flex justify-between items-start mb-6">
+                        <div className="p-3 bg-emerald-100 rounded-2xl text-emerald-600">
+                            <Zap size={28} />
                         </div>
                     </div>
-                </div>
-            </motion.div>
+                    <h3 className="text-2xl font-bold text-slate-900">{Basic.name}</h3>
+                    <p className="text-slate-500 text-sm mt-2">Essential management for small startups.</p>
+                    <div className="mt-6 mb-2">
+                        <span className="text-4xl font-black text-slate-900">${Basic.price}</span>
+                        <span className="text-slate-500 font-medium"> /month</span>
+                    </div>
+                    <div className="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 py-1 px-3 rounded-full self-start mb-8">
+                        Limit: {Basic.employeeLimit} Employees
+                    </div>
+                    <ul className="space-y-4 mb-8 flex-grow">
+                        {Basic.features.map((feature) => (
+                            <li key={feature} className="flex items-center gap-3 text-slate-600">
+                                <Check size={18} className="text-emerald-500 flex-shrink-0" />
+                                <span className="text-sm font-medium">{feature}</span>
+                            </li>
+                        ))}
+                    </ul>
+                    <button onClick={() => handleUpgrade(Basic._id)} className="w-full py-4 rounded-xl font-bold border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white transition-colors duration-200">
+                        Get Started
+                    </button>
+                </CardAnimation>
+
+                {/* STANDARD PACKAGE (FEATURED) */}
+                <CardAnimation
+                    initial={{ opacity: 0, y: -15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: .4 }}
+                    className="relative bg-white rounded-3xl p-8 border-2 border-blue-600 shadow-2xl transform md:-translate-y-4 flex flex-col">
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg flex items-center gap-1">
+                        <Star size={12} fill="white" /> Most Popular
+                    </div>
+                    <div className="flex justify-between items-start mb-6">
+                        <div className="p-3 bg-blue-100 rounded-2xl text-blue-600">
+                            <Shield size={28} />
+                        </div>
+                    </div>
+                    <h3 className="text-2xl font-bold text-slate-900">{Standard.name}</h3>
+                    <p className="text-slate-500 text-sm mt-2">Scale your business with advanced tools.</p>
+                    <div className="mt-6 mb-2">
+                        <span className="text-4xl font-black text-slate-900">${Standard.price}</span>
+                        <span className="text-slate-500 font-medium"> /month</span>
+                    </div>
+                    <div className="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 py-1 px-3 rounded-full self-start mb-8">
+                        Limit: {Standard.employeeLimit} Employees
+                    </div>
+                    <ul className="space-y-4 mb-8 flex-grow">
+                        {Standard.features.map((feature) => (
+                            <li key={feature} className="flex items-center gap-3 text-slate-700">
+                                <Check size={18} className="text-blue-600 flex-shrink-0" />
+                                <span className="text-sm font-semibold">{feature}</span>
+                            </li>
+                        ))}
+                    </ul>
+                    <button onClick={() => handleUpgrade(Standard._id)} className="w-full py-4 rounded-xl font-bold bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all duration-200">
+                        Upgrade Now
+                    </button>
+                </CardAnimation>
+
+                {/* PREMIUM PACKAGE */}
+
+                <CardAnimation
+                    initial={{ opacity: 0, y: -15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: .6 }}
+                    className="bg-slate-900 rounded-3xl p-8 border border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
+                    <div className="flex justify-between items-start mb-6">
+                        <div className="p-3 bg-purple-500/10 rounded-2xl text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-colors duration-500">
+                            <Crown size={28} />
+                        </div>
+                    </div>
+                    <h3 className="text-2xl font-bold text-white">{Premium.name}</h3>
+                    <p className="text-slate-400 text-sm mt-2">Maximum power for professional teams.</p>
+                    <div className="mt-6 mb-2">
+                        <span className="text-4xl font-black text-white">$ {Premium.price}</span>
+                        <span className="text-slate-400 font-medium">/month</span>
+                    </div>
+                    <div className="text-xs font-bold uppercase tracking-wider text-purple-300 bg-purple-500/20 py-1 px-3 rounded-full self-start mb-8">
+                        Limit: {Premium.employeeLimit} Employees
+                    </div>
+                    <ul className="space-y-4 mb-8 flex-grow">
+                        {Premium.features.map((feature) => (
+                            <li key={feature} className="flex items-center gap-3 text-slate-300">
+                                <Check size={18} className="text-purple-400 flex-shrink-0" />
+                                <span className="text-sm font-medium">{feature}</span>
+                            </li>
+                        ))}
+                    </ul>
+                    <button onClick={() => handleUpgrade(Premium._id)} className="w-full py-4 rounded-xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:opacity-90 transition-opacity duration-200 shadow-lg shadow-purple-900/20">
+                        Go Unlimited
+                    </button>
+                </CardAnimation>
+            </div>
+
+            {/* Trust Badge */}
+            <div className="mt-16 text-center">
+                <p className="text-sm text-slate-400 font-medium tracking-widest uppercase">
+                    Trusted by 500+ Logistics Companies
+                </p>
+            </div>
         </div>
     );
 

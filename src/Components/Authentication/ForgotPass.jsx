@@ -36,7 +36,7 @@ const ForgotPass = () => {
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <label className="label">Email</label>
                             <input type="email" {...register('email')} required className="input" placeholder="Email" />
-                            <button className="btn btn-neutral mt-4">Send a code</button>
+                            <button className="btn btn-neutral hover:scale-105 transition-all duration-400 mt-4">Send a code</button>
                         </form>
                     </div>
                 </div>

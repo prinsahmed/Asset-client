@@ -13,11 +13,23 @@ const UserLogin = () => {
     const { register, handleSubmit } = useForm();
 
     function onSubmit(data) {
+
+
+        Swal.fire({
+            title: 'Authenticating...',
+            html: 'Checking your credentials, please wait.',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading(); 
+            }
+        });
+
+
         signInWithEmailAndPassword(auth, data.email, data.password)
             .then(res => {
                 if (res) {
                     Swal.fire({
-                        position: "top-end",
                         icon: "success",
                         title: "Successfully logged in",
                         showConfirmButton: false,
@@ -26,7 +38,15 @@ const UserLogin = () => {
                     navigate('/dash')
                 }
             })
-            .catch(error => console.log(error.message))
+            .catch(error => {
+                console.log(error.message)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Login Failed',
+                    text: error.message,
+                    confirmButtonColor: '#4f46e5'
+                });
+            })
     }
 
     return (
@@ -48,7 +68,7 @@ const UserLogin = () => {
                         <label className="label">Password</label>
                         <input type="password" {...register('password')} className="input" placeholder="Password" />
                         <div><Link to='/auth/forget-pass' className="link link-hover">Forgot password?</Link></div>
-                        <button className="btn btn-neutral mt-4">Login</button>
+                        <button className="btn btn-neutral hover:scale-105 transition-all duration-400 mt-4">Login</button>
                     </fieldset>
                 </form>
             </div>

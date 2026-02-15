@@ -10,9 +10,7 @@ const NavBar = () => {
     function handleSignOut() {
         signOutCurrentUser()
             .then(() => {
-
                 Swal.fire({
-                    position: "top-end",
                     icon: "success",
                     title: "Successfully logged out",
                     showConfirmButton: false,
@@ -56,8 +54,8 @@ const NavBar = () => {
             </div>
             <div className="navbar-end">
                 {
-                    user ? <button onClick={handleSignOut} className='button-style'>Logout</button> :
-                        <Link to='/auth/login' className='button-style'>Login</Link>
+                    user ? <button onClick={handleSignOut} className='btn btn-neutral hover:scale-105 transition-all duration-300'>Logout</button> :
+                        <Link to='/auth/login' className='btn btn-neutral hover:scale-105 transition-all duration-300'>Login</Link>
                 }
             </div>
         </div>

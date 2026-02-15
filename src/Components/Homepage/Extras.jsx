@@ -3,7 +3,7 @@ import CardAnimation from '../Animations/CardAnimation';
 
 const Extras = () => {
     return (
-        <div>
+        <div className='pb-20'>
 
             {/* How It Works Section */}
             <section>

@@ -24,6 +24,7 @@ import MyProfileHR from "../Pages/Dashboard/HR/MyProfileHR";
 import PackageHR from "../Pages/Dashboard/HR/PackageHR";
 import MyProfileEmplyee from "../Pages/Dashboard/Employee/MyProfileEmplyee";
 import PaymentSuccess from "../Pages/Payment/PaymentSuccess";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 
 
@@ -131,5 +132,9 @@ export const router = createBrowserRouter([
                 <PaymentSuccess />
             </HRroute>
         </LoginRoute>
+    },
+    {
+        path:'*',
+        element:<ErrorPage/>
     }
 ])

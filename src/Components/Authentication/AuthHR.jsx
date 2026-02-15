@@ -22,6 +22,16 @@ const AuthHR = () => {
 
     function onSubmit(data) {
 
+        Swal.fire({
+            title: 'Processing',
+            html: 'Storing your data, please wait.',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
         const imageFile = data.companyLogo[0];
         const formData = new FormData();
         formData.append('image', imageFile)
@@ -30,7 +40,6 @@ const AuthHR = () => {
         signInEmail(data.email, data.password)
             .then(() => {
                 Swal.fire({
-                    position: "top-end",
                     icon: "success",
                     title: "Successfully registered",
                     showConfirmButton: false,
@@ -53,7 +62,15 @@ const AuthHR = () => {
                         axiosSecure.post('/user-HR', HRData)
 
                     })
-                    .catch(error => console.log(error.message))
+                    .catch(error => {
+                        console.log(error.message)
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Login Failed',
+                            text: error.message,
+                            confirmButtonColor: '#4f46e5'
+                        });
+                    })
             })
 
 
@@ -102,7 +119,7 @@ const AuthHR = () => {
                                     <label className='label mt-2'>Date of Birth</label>
                                     <DatePicker showIcon selected={selectedDate} onChange={setSelectedDate} />
 
-                                    <button className="btn btn-neutral mt-4">Register</button>
+                                    <button className="btn btn-neutral hover:scale-105 transition-all duration-400 mt-4">Register</button>
                                 </fieldset>
                             </form>
                         </div>
