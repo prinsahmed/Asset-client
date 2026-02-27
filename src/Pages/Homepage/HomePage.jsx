@@ -14,12 +14,15 @@ const HomePage = () => {
     return (
         <>
             <Banner />
-            <main className='max-w-10/12 mx-auto'>
+            <main>
+               <div className='w-11/12 mx-auto'> 
                 <PricingCard />
                 <About />
                 <Feature />
-                <Statistics />
                 <Extras />
+                <Statistics />
+
+                </div>
             </main>
         </>
     );

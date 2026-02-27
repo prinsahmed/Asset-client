@@ -63,7 +63,7 @@ const AddAsset = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{duration:0.3, delay:0}}
-            className="min-h-screen pt-6">
+            className="min-h-screen pt-6 px-6">
             <div className="max-w-7xl mx-auto">
 
 
@@ -71,7 +71,7 @@ const AddAsset = () => {
                     Add New Product
                 </h1>
 
-                <div className="bg-white  rounded-lg p-2">
+                <div className="bg-white  rounded-lg p-4">
                     <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
 

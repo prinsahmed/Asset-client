@@ -25,7 +25,7 @@ const AllRequests = () => {
 
 
     if (isLoading) {
-        return <div className=' h-dvh flex justify-center items-center '>
+        return <div className=' min-h-screen flex justify-center items-center '>
             <Lottie style={{ width: 400, height: 400 }} animationData={loadingAnimation} loop={true} />
         </div>
     }

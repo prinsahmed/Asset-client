@@ -5,7 +5,7 @@ import Footer from '../Components/Homepage/Footer';
 
 const MainLayout = () => {
     return (
-        <div className='bg-[#F7F6F2]'>
+        <div className='bg-[#F7F6F2] bg-gradient-to-br from-[#7378fe20] to-[#f8acff5c]'>
             <NavBar />
             <Outlet />
             <Footer/>

@@ -1,65 +1,117 @@
-import React, { useContext } from 'react';
-import { Link, NavLink } from 'react-router';
-import { AuthContext } from '../../Context/Context';
-import Swal from 'sweetalert2';
+import React, { useContext } from "react";
+import { Link, NavLink } from "react-router";
+import { AuthContext } from "../../Context/Context";
+import Swal from "sweetalert2";
 
 const NavBar = () => {
+  const { user, signOutCurrentUser } = useContext(AuthContext);
 
-    const { user, signOutCurrentUser } = useContext(AuthContext);
+  function handleSignOut() {
+    signOutCurrentUser().then(() => {
+      Swal.fire({
+        icon: "success",
+        title: "Successfully logged out",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    });
+  }
 
-    function handleSignOut() {
-        signOutCurrentUser()
-            .then(() => {
-                Swal.fire({
-                    icon: "success",
-                    title: "Successfully logged out",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-
-            })
-    }
-
-    return (
-        <div className="navbar bg-gradient-to-br from-cyan-400 to-blue-500 text-white  shadow-sm ">
-            <div className="navbar-start">
-                <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
-                    </div>
-                    <ul
-                        tabIndex="-1"
-                        className="menu nav2 menu-sm text-white  dropdown-content  rounded-box z-1 mt-3 w-52 p-2 shadow">
-                        <li><NavLink to='/'>Home</NavLink></li>
-                        {
-                            !user && <><li><NavLink to='/auth/employee-registration'>Join as Employee</NavLink></li>
-                                <li><NavLink to='/auth/HR-registration'>Join as HR</NavLink></li></>
-                        }
-                        {user && <li><NavLink to='/dash'>Dashboard</NavLink></li>}
-                    </ul>
-                </div>
-
-                <NavLink to='/' className="btn btn-ghost text-white text-xl p-0">AssetVerse</NavLink>
-
-            </div>
-            <div className="navbar-center hidden lg:flex">
-                <ul className="menu nav2 menu-horizontal text-white px-1">
-                    <li><NavLink to='/'>Home</NavLink></li>
-                    {
-                        !user && <><li><NavLink to='/auth/employee-registration'>Join as Employee</NavLink></li>
-                            <li><NavLink to='/auth/HR-registration'>Join as HR</NavLink></li></>
-                    }
-                    {user && <li><NavLink to='/dash'>Dashboard</NavLink></li>}
-                </ul>
-            </div>
-            <div className="navbar-end">
-                {
-                    user ? <button onClick={handleSignOut} className='btn btn-neutral hover:scale-105 transition-all duration-300'>Logout</button> :
-                        <Link to='/auth/login' className='btn btn-neutral hover:scale-105 transition-all duration-300'>Login</Link>
-                }
-            </div>
+  return (
+    <div className="flex bg-gradient-to-br px-2  fixed z-50 w-full from-cyan-400 to-blue-500 text-white  shadow-sm ">
+      <div className="navbar-start">
+        <div className="dropdown">
+          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              {" "}
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              />{" "}
+            </svg>
+          </div>
+          <ul
+            tabIndex="-1"
+            className="menu nav2 menu-sm text-white  dropdown-content  rounded-box z-1 mt-3 w-52 p-2 shadow"
+          >
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            {!user && (
+              <>
+                <li>
+                  <NavLink to="/auth/employee-registration">
+                    Join as Employee
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/auth/HR-registration">Join as HR</NavLink>
+                </li>
+              </>
+            )}
+            {user && (
+              <li>
+                <NavLink to="/dash">Dashboard</NavLink>
+              </li>
+            )}
+          </ul>
         </div>
-    );
+
+        <NavLink to="/" className="btn btn-ghost  text-white text-xl p-0">
+          AssetVerse
+        </NavLink>
+      </div>
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu nav2 menu-horizontal text-white px-1">
+          <li>
+            <NavLink to="/">Home</NavLink>
+          </li>
+          {!user && (
+            <>
+              <li>
+                <NavLink to="/auth/employee-registration">
+                  Join as Employee
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/auth/HR-registration">Join as HR</NavLink>
+              </li>
+            </>
+          )}
+          {user && (
+            <li>
+              <NavLink to="/dash">Dashboard</NavLink>
+            </li>
+          )}
+        </ul>
+      </div>
+      <div className="navbar-end">
+        {user ? (
+          <button
+            onClick={handleSignOut}
+            className="btn btn-neutral hover:scale-105 transition-all duration-300"
+          >
+            Logout
+          </button>
+        ) : (
+          <Link
+            to="/auth/login"
+            className="btn btn-neutral hover:scale-105 transition-all duration-300"
+          >
+            Login
+          </Link>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default NavBar;

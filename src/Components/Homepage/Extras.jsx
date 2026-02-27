@@ -3,7 +3,7 @@ import CardAnimation from '../Animations/CardAnimation';
 
 const Extras = () => {
     return (
-        <div className='pb-20'>
+        <div>
 
             {/* How It Works Section */}
             <section>
@@ -19,7 +19,7 @@ const Extras = () => {
                         initial={{ opacity: 0, y: -30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: .5, delay: 0.2 }}
-                        className="bg-gray-50 p-8 rounded-xl shadow-[0px_8px_24px_rgba(149,157,165,0.2)]">
+                        className="bg-white/60 backdrop-blur-md  p-8 rounded-xl shadow-[0px_8px_24px_rgba(149,157,165,0.2)]">
                             <div className="text-indigo-500 text-5xl mb-4">📝</div>
                             <h3 className="text-xl font-semibold mb-2">1. Register & Add Assets</h3>
                             <p className="text-gray-600">
@@ -32,7 +32,7 @@ const Extras = () => {
                         initial={{ opacity: 0, y: -30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: .5, delay: 0.4 }}
-                        className="bg-gray-50 p-8 rounded-xl shadow-[0px_8px_24px_rgba(149,157,165,0.2)]">
+                        className="bg-white/60 backdrop-blur-md  p-8 rounded-xl shadow-[0px_8px_24px_rgba(149,157,165,0.2)]">
                             <div className="text-indigo-500 text-5xl mb-4">📊</div>
                             <h3 className="text-xl font-semibold mb-2">2. Track & Monitor</h3>
                             <p className="text-gray-600">
@@ -45,7 +45,7 @@ const Extras = () => {
                         initial={{ opacity: 0, y: -30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: .5, delay: 0.6 }}
-                        className="bg-gray-50 p-8 rounded-xl shadow-[0px_8px_24px_rgba(149,157,165,0.2)]">
+                        className="bg-white/60 backdrop-blur-md  p-8 rounded-xl shadow-[0px_8px_24px_rgba(149,157,165,0.2)]">
                             <div className="text-indigo-500 text-5xl mb-4">🔔</div>
                             <h3 className="text-xl font-semibold mb-2">3. Get Alerts & Insights</h3>
                             <p className="text-gray-600">
