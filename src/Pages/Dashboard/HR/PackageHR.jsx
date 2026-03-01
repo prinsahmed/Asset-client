@@ -26,9 +26,9 @@ const PackageHR = () => {
         <Lottie style={{ width: 200, height: 200 }} animationData={loadingAnimation} loop={true} />
     </div>
 
-    const Basic = assets[0];
-    const Standard = assets[1];
-    const Premium = assets[2]
+    const Premium = assets[0];
+    const Basic = assets[1];
+    const Standard = assets[2]
 
     function handleUpgrade(id) {
 
@@ -45,7 +45,7 @@ const PackageHR = () => {
 
 
     return (
-        <div className="min-h-screen bg-slate-50 py-20 px-6 font-sans antialiased">
+        <div className="min-h-screen bg-slate-50  px-6 font-sans antialiased">
             {/* Header Section */}
             <div className="max-w-4xl mx-auto text-center mb-16">
                 <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">

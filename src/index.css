@@ -1,31 +1,25 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-body{
+body {
   font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 }
 
-
-.nav li .active{
-    color: black;
-    background-color: white;
-    border-radius: 30px 1px 1px 30px ;
-   
+.nav li .active {
+  color: black;
+  background-color: white;
+  border-radius: 30px 30px;
+  background: rgba(255, 255, 255, 0.816);
+ 
 }
 
-.nav2 li .active{
-    color: black;
+.nav2 li .active {
+  color: black;
 }
-
-
-
-
-

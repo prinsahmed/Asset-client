@@ -1,5 +1,6 @@
 import React from 'react';
 import CardAnimation from '../Animations/CardAnimation';
+import { Link } from 'react-router';
 
 const Extras = () => {
     return (
@@ -7,8 +8,8 @@ const Extras = () => {
 
             {/* How It Works Section */}
             <section>
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl font-extrabold text-gray-900 mt-20 mb-10">
+                <div className="max-w-7xl mx-auto md:px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 className="text-3xl font-extrabold text-gray-900 mt-10 md:mt-20 lg:mt-28 lg:mb-10 md:mb-8 mb-4">
                         How AssetVerse Works
                     </h2>
 
@@ -58,14 +59,14 @@ const Extras = () => {
             </section>
 
             {/* FAQ Section */}
-            <div className='flex justify-center items-end'>
-                <section>
-                    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 ">
-                        <h2 className="text-3xl font-extrabold text-center text-gray-900 mt-20 mb-10">
+                        <h2 className="text-3xl font-extrabold text-center text-gray-900 mt-10 md:mt-20 lg:mt-28 lg:mb-10 md:mb-8 mb-4" >
                             Frequently Asked Questions
                         </h2>
+            <div className='md:flex justify-center items-end'>
+                <section>
+                    <div className="max-w-4xl mx-auto md:px-4  lg:px-8 ">
 
-                        <div className="space-y-6">
+                        <div className="space-y-6 mb-4 md:mb-0">
                             {/* FAQ 1 */}
                             <div>
                                 <h3 className="text-lg font-semibold text-gray-900">1. How do I add my assets to AssetVerse?</h3>
@@ -94,7 +95,7 @@ const Extras = () => {
                 </section>
 
                 {/* Contact CTA Section */}
-                <section className="bg-[#52b6d6] py-16 rounded-lg">
+                <section className="bg-gradient-to-br   from-cyan-400 to-blue-500 py-16 rounded-lg">
                     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
                         <h2 className="text-3xl font-extrabold mb-4">
                             Ready to Simplify Your Asset Management?
@@ -102,12 +103,12 @@ const Extras = () => {
                         <p className="text-lg mb-8">
                             Sign up today and start managing your assets effortlessly with AssetVerse.
                         </p>
-                        <a
-                            href="#contact"
+                        <Link
+                            to='/auth/login'
                             className="inline-block bg-white text-indigo-600 font-semibold px-8 py-4 rounded-lg shadow-lg hover:bg-gray-100 transition"
                         >
                             Get Started
-                        </a>
+                        </Link>
                     </div>
                 </section>
             </div>

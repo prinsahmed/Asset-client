@@ -21,7 +21,6 @@ const HomePage = () => {
                 <Feature />
                 <Extras />
                 <Statistics />
-
                 </div>
             </main>
         </>

@@ -3,7 +3,7 @@ import CardAnimation from "../../Components/Animations/CardAnimation"; // Adjust
 import bgImage from "../../assets/bg-banner.jpg"; // Adjust path
 
 const Banner = () => {
-  const title = "Strategic solutions for   your assets";
+  const title = "Strategic solutions for your assets";
   const letters = Array.from(title);
 
   const containerVariants = {
@@ -34,20 +34,20 @@ const Banner = () => {
       initial={{ opacity: 0, y: -15 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="relative h-dvh overflow-hidden"
+      className="relative min-h-screen overflow-hidden"
     >
       <img
         src={bgImage}
-        className="absolute top-12 inset-0 w-full h-full object-cover"
+        className="absolute top-10 inset-0 w-full h-full"
         alt="Banner Background"
       />
 
-      <div className="absolute top-12 inset-0 bg-black/50 pt-36 pl-32 flex flex-col justify-start">
+      <div className="absolute top-10 inset-0 bg-black/50 pt-36 pl-2 lg:md:pl-32  justify-start">
         <motion.h1
           variants={containerVariants}
           initial="initial"
           animate="animate"
-          className="text-white font-bold text-7xl flex flex-wrap leading-tight max-w-4xl"
+          className="text-white font-bold lg:text-7xl md:text-5xl text-4xl  flex flex-wrap leading-tight max-w-[360px] md:max-w-[780px]"
         >
           {letters.map((char, index) => (
             <motion.span
@@ -65,7 +65,7 @@ const Banner = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 1 }}
-          className="text-white font-light text-lg mt-8 border-l-4 border-[#7980e4] pl-4"
+          className="text-white font-light text-lg mt-8 pl-2 md:border-l-4 md:border-[#7980e4] md:pl-4"
         >
           Effortless asset management designed to maximize <br />
           your returns and simplify your workflow.

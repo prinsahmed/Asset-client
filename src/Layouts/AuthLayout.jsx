@@ -4,7 +4,7 @@ import { Outlet } from "react-router";
 
 const AuthLayout = () => {
   return (
-    <div className="bg-gradient-to-br from-[#7378fe20] to-[#f8acff5c]">
+    <div>
       <NavBar />
       <Outlet />
     </div>

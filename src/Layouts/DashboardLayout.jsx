@@ -1,148 +1,204 @@
-import React, { useContext } from 'react';
-import { FaFileSignature, FaList } from 'react-icons/fa';
-import { ImProfile } from 'react-icons/im';
-import { IoBagAdd } from 'react-icons/io5';
-import { MdOutlineProductionQuantityLimits, MdWebAsset } from 'react-icons/md';
-import { RiTeamFill } from 'react-icons/ri';
-import { NavLink, Outlet } from 'react-router';
-import { AuthContext } from '../Context/Context';
+import React, { useContext, useState, useEffect } from "react";
+import { FaFileSignature, FaList } from "react-icons/fa";
+import { ImProfile } from "react-icons/im";
+import { IoBagAdd } from "react-icons/io5";
+import { MdOutlineProductionQuantityLimits, MdWebAsset } from "react-icons/md";
+import { RiTeamFill } from "react-icons/ri";
+import { NavLink, Outlet } from "react-router";
+import { AuthContext } from "../Context/Context";
+import { ChevronDown, Home, Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import SidebarLink from "../Components/Navigation/SideBarLink";
 
 const DashboardLayout = () => {
-    const { userData } = useContext(AuthContext);
+  const { userData } = useContext(AuthContext);
+  const [isOpen, setIsOpen] = useState(window.innerWidth > 1024);
 
 
-    return (
-        <div className="drawer bg-gradient-to-br from-[#7378fe20] to-[#f8acff5c]  lg:drawer-open">
-            <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content">
-                {/* Navbar */}
-                <nav className="py-3 w-full rounded-bl-4xl mt-1 rounded-tr-4xl rounded-br-xl rounded-tl-xl bg-gradient-to-br from-cyan-400 to-blue-500 text-white">
-                    <div className="px-4">Navbar Title</div>
-                </nav>
-                {/* Page content here */}
+  return (
+    <div className="flex min-h-screen bg-gray-50 overflow-hidden">
+      {/* 1. ANIMATED OVERLAY (Mobile Only) */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsOpen(false)}
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 lg:hidden"
+          />
+        )}
+      </AnimatePresence>
 
-                <Outlet className="p-4">Page Content</Outlet>
-
+      {/* 2. SIDEBAR */}
+      <AnimatePresence mode="wait">
+        {isOpen && (
+          <motion.aside
+            key="sidebar"
+            initial={{ x: -300, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -300, opacity: 0 }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed lg:static inset-y-0 left-0 z-50 w-72 min-h-screen bg-white border-r border-gray-200 flex flex-col shadow-2xl lg:shadow-none"
+          >
+            {/* Sidebar Profile Section */}
+            <div className="p-6 border-b border-gray-100 bg-gray-50/50 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <img
+                  className="w-10 h-10 rounded-full ring-2 ring-cyan-500"
+                  src={userData?.userImage}
+                  alt="Profile"
+                />
+                <div>
+                  <p className="font-bold text-gray-800 text-sm truncate w-32">
+                    {userData?.name}
+                  </p>
+                  <p className="text-[10px] text-cyan-600 font-bold uppercase tracking-widest">
+                    {userData?.role}
+                  </p>
+                </div>
+              </div>
+              {/* Close button for mobile inside sidebar */}
+              <button
+                onClick={() => setIsOpen(false)}
+                className="lg:hidden p-1 hover:bg-gray-200 rounded-md"
+              >
+                <X size={20} />
+              </button>
             </div>
 
-            <div className='min-w-[220px]'>
-                <div className='bg-gradient-to-br from-cyan-400 to-blue-500 text-white mr-1 mt-1 mb-2 rounded-bl-4xl rounded-tr-4xl rounded-br-xl rounded-tl-xl py-3'>
-                    <NavLink className='flex gap-2 items-center ' to={userData?.role === "HR" ? '/dash/HR-profile' : '/dash/employee-profile'}>
-                        <div className='ml-4'>
-                            <img className='w-6 h-6 rounded-full' src={userData.userImage} alt="User Image" />
-                        </div>
-                        <p className='text-xs'>
-                            {userData.name}
-                        </p></NavLink>
-                </div>
-                <div className="flex min-h-full flex-col rounded-t-2xl  items-start bg-gradient-to-br from-cyan-400 to-blue-500 text-white is-drawer-close:w-14 is-drawer-open:w-64">
-                    {/* Sidebar content here */}
-                    <ul className="menu p-0 pl-2 text-gray-100 w-full grow ">
-                        {/* List item */}
-                        <li>
-                            <NavLink to='/' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
-                                {/* Home icon */}
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-                                <span className="is-drawer-close:hidden">Homepage</span>
-                            </NavLink>
-                        </li>
+            {/* Navigation Links */}
+            <ul className="menu p-4 gap-2 text-gray-600 font-medium overflow-y-auto grow">
+              <SidebarLink
+                to="/"
+                icon={<Home size={20} />}
+                label="Homepage"
+                setIsOpen={setIsOpen}
+              />
 
-                        {/* List item */}
+              <div className="mt-6 mb-2 px-4 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                Main Menu
+              </div>
 
-                        <div className='nav space-y-3 text-s '>
-                            {
-                                userData?.role === 'HR' && <>
-                                    <li>
-                                        <NavLink to='/dash/asset-list'>
-                                            <MdWebAsset />
-                                            <span className="is-drawer-close:hidden" >Asset List</span>
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to='/dash/add-asset' >
-                                            <IoBagAdd />
-                                            <span className="is-drawer-close:hidden">Add Asset</span>
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to='/dash/all-request'>
-                                            <FaFileSignature />
-                                            <span className="is-drawer-close:hidden">Asset Requests</span>
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to='/dash/employee-requests'>
-                                            <FaList />
-                                            <span className="is-drawer-close:hidden">Employee Requests</span>
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to='/dash/my-employee'>
-                                            <RiTeamFill />
+              {userData?.role === "HR" && (
+                <>
+                  <SidebarLink
+                    to="/dash/asset-list"
+                    icon={<MdWebAsset />}
+                    label="Asset List"
+                    setIsOpen={setIsOpen}
+                  />
+                  <SidebarLink
+                    to="/dash/add-asset"
+                    icon={<IoBagAdd />}
+                    label="Add Asset"
+                    setIsOpen={setIsOpen}
+                  />
+                  <SidebarLink
+                    to="/dash/all-request"
+                    icon={<FaFileSignature />}
+                    label="Asset Requests"
+                    setIsOpen={setIsOpen}
+                  />
+                  <SidebarLink
+                    to="/dash/employee-requests"
+                    icon={<FaList />}
+                    label="Employee Requests"
+                    setIsOpen={setIsOpen}
+                  />
+                  <SidebarLink
+                    to="/dash/my-employee"
+                    icon={<RiTeamFill />}
+                    label="Employee List"
+                    setIsOpen={setIsOpen}
+                  />
+                  <SidebarLink
+                    to="/dash/HR-package"
+                    icon={<FaList />}
+                    label="Upgrade Package"
+                    setIsOpen={setIsOpen}
+                  />
+                  <SidebarLink
+                    to="/dash/HR-profile"
+                    icon={<ImProfile />}
+                    label="My Profile"
+                    setIsOpen={setIsOpen}
+                  />
+                </>
+              )}
 
-                                            <span className="is-drawer-close:hidden">Employee List</span>
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to='/dash/HR-package'>
-                                            <FaList />
-                                            <span className="is-drawer-close:hidden">Upgrade Package</span>
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to='/dash/HR-profile'>
-                                            <ImProfile />
-                                            <span className="is-drawer-close:hidden">My Profile</span>
-                                        </NavLink>
-                                    </li>
-                                </>
-                            }
+              {userData?.role === "Employee" && (
+                <>
+                  <SidebarLink
+                    to="/dash/employee-asset"
+                    icon={<MdOutlineProductionQuantityLimits />}
+                    label="My Assets"
+                    setIsOpen={setIsOpen}
+                  />
+                  <SidebarLink
+                    to="/dash/request-asset"
+                    icon={<FaFileSignature />}
+                    label="Request Asset"
+                    setIsOpen={setIsOpen}
+                  />
+                  <SidebarLink
+                    to="/dash/employee-join"
+                    icon={<FaFileSignature />}
+                    label="Join Team"
+                    setIsOpen={setIsOpen}
+                  />
+                  <SidebarLink
+                    to="/dash/employee-profile"
+                    icon={<ImProfile />}
+                    label="My Profile"
+                    setIsOpen={setIsOpen}
+                  />
+                </>
+              )}
+            </ul>
+          </motion.aside>
+        )}
+      </AnimatePresence>
 
-                            {
-                                userData?.role === 'Employee' && <>
+      {/* 3. MAIN CONTENT AREA */}
+      <div className="flex-1 flex flex-col h-screen overflow-hidden">
+        {/* Top Navbar */}
+        <nav className="h-16 flex items-center justify-between px-2 bg-white border-b border-gray-200 shrink-0">
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className=" rounded-lg hover:bg-gray-100 text-gray-600 transition-colors"
+            >
+              {isOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+            <h2 className="text-lg font-semibold text-gray-800">Dashboard</h2>
+          </div>
 
-                                    <li>
-                                        <NavLink to='/dash/employee-asset'>
-                                            <MdOutlineProductionQuantityLimits />
-                                            <span className="is-drawer-close:hidden">My Assets</span></NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to='/dash/request-asset'>
-                                            <FaFileSignature />
-                                            <span className="is-drawer-close:hidden">Request an Asset</span></NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to='/dash/employee-join'>
-                                            <FaFileSignature />
-                                            <span className="is-drawer-close:hidden">Join as Employee</span></NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to='/dash/employee-profile'>
-                                            <ImProfile />
-                                            <span className="is-drawer-close:hidden">My Profile</span>
-                                        </NavLink>
-                                    </li>
-
-                                </>
-                            }
-
-
-                        </div>
-
-
-
-                        <li>
-                            <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Settings">
-                                {/* Settings icon */}
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M20 7h-9"></path><path d="M14 17H5"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg>
-                                <span className="is-drawer-close:hidden">Settings</span>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
+          <div className="flex items-center gap-3">
+            <div className="text-right hidden sm:block">
+              <p className="text-xs font-bold text-gray-800">
+                {userData?.name}
+              </p>
+              <p className="text-[10px] text-gray-500">{userData?.email}</p>
             </div>
-        </div>
-    );
+            <img
+              className="w-9 h-9 rounded-full ring-1 ring-gray-200"
+              src={userData?.userImage}
+              alt=""
+            />
+          </div>
+        </nav>
+
+        {/* Scrollable Page Body */}
+        <main className="flex-1 overflow-y-auto p-6">
+          <Outlet />
+        </main>
+      </div>
+    </div>
+  );
 };
+
+
+
 
 export default DashboardLayout;

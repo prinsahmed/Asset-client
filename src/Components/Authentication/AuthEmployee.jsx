@@ -8,9 +8,13 @@ import Swal from "sweetalert2";
 import { useAxios } from "../../Hooks/Api/useAxios";
 import CardAnimation from "../Animations/CardAnimation";
 import regImage from "../../assets/Sign up-pana.png";
+import { EyeClosed, EyeIcon } from "lucide-react";
+import Input from "../Input/Input";
+import Button from "../Button/Button";
 
 const AuthEmployee = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [viewPass, setViewPass] = useState(false);
   const {
     register,
     handleSubmit,
@@ -42,15 +46,13 @@ const AuthEmployee = () => {
       .then((res) => {
         if (res) {
           axiosSecure.post("/user-employee", EmplyeeData).then((res) => {
-            console.log(res);
             if (res.data.insertedId) {
               Swal.fire({
                 icon: "success",
                 title: "Successfully registered",
                 showConfirmButton: false,
                 timer: 1000,
-              });
-              navigate("/dash");
+              }).then(() => navigate("/dash"));
             }
           });
         }
@@ -68,57 +70,74 @@ const AuthEmployee = () => {
 
   return (
     <CardAnimation
-      className="pt-12 min-h-screen"
+      className="pt-24 px-4 md:pt-12 min-h-screen"
       initial={{ opacity: 0, y: -15 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >
       <div>
         <div className=" flex items-center gap-x-16 justify-center ">
-          <div>
-            <img className="w-[39rem]" src={regImage} alt="Sign up-pana" />
+          <div className="hidden md:block">
+            <img
+              className="max-w-[39rem]  "
+              src={regImage}
+              alt="Sign up-pana"
+            />
           </div>
+          <div className="h-80 w-[1px] hidden md:block bg-gray-300"></div>
 
-          <div className="card bg-base-100 w-full max-w-sm shrink-0 ">
+          <div className="card bg-gradient-to-br from-black/20 to-white/20 backdrop-blur-xl w-full max-w-sm shrink-0  ">
             <div className="card-body">
-              <h2 className="text-2xl text-[#90CAF9] text-center font-bold">
-                Registration
-              </h2>
+              <h2 className="text-2xl  text-center font-bold">Sign Up</h2>
               <form onSubmit={handleSubmit(onSubmit)}>
-                <fieldset className="fieldset">
+                <fieldset className="fieldset space-y-1">
                   <label className="label">Name</label>
-                  <input
+                  <Input
                     type="text"
-                    {...register("name")}
-                    required
-                    className="input focus:outline-sky-500 focus:border-none focus:duration-80"
+                    name="name"
                     placeholder="Name"
+                    register={register}
                   />
 
                   <label className="label">Email</label>
-                  <input
+                  <Input
                     type="email"
-                    {...register("email")}
-                    required
-                    className="input focus:outline-sky-500 focus:border-none focus:duration-80"
+                    name="email"
                     placeholder="Email"
+                    register={register}
                   />
 
                   <label className="label">Password</label>
-                  <input
-                    type="password"
-                    {...register("password", {
-                      required: "Password is required",
-                      pattern: {
-                        value:
-                          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{6,}$/,
-                        message:
-                          "Must have lowercase, uppercase, number and minimum 6 characters",
-                      },
-                    })}
-                    className="input focus:outline-sky-500 focus:border-none focus:duration-80"
-                    placeholder="Password"
-                  />
+                  <div className="relative">
+                    <input
+                      type={viewPass ? "text" : "password"}
+                      {...register("password", {
+                        required: "Password is required",
+                        pattern: {
+                          value:
+                            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{6,}$/,
+                          message:
+                            "Must have lowercase, uppercase, number and minimum 6 characters",
+                        },
+                      })}
+                      className="input w-full focus:outline-sky-500 focus:border-none focus:duration-80"
+                      placeholder="Password"
+                    />
+                    <div
+                      onClick={() => setViewPass(!viewPass)}
+                      className="absolute z-50 top-2.5 right-3"
+                    >
+                      {viewPass ? (
+                        <span>
+                          <EyeIcon />
+                        </span>
+                      ) : (
+                        <span>
+                          <EyeClosed />
+                        </span>
+                      )}
+                    </div>
+                  </div>
                   <p className="text-red-500">{errors.password?.message}</p>
 
                   <label className="label mt-2">Date of Birth</label>
@@ -128,9 +147,7 @@ const AuthEmployee = () => {
                     onChange={setSelectedDate}
                     className="focus:outline-sky-500 focus:border-none focus:duration-80"
                   />
-                  <button className="btn btn-neutral hover:scale-105 transition-all duration-400 mt-4">
-                    Register
-                  </button>
+                  <Button>Register</Button>
                 </fieldset>
               </form>
             </div>

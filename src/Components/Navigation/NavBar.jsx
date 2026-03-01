@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../../Context/Context";
 import Swal from "sweetalert2";
+import Button from "../Button/Button";
+import NavDropdown from "./NavDropdown";
 
 const NavBar = () => {
   const { user, signOutCurrentUser } = useContext(AuthContext);
@@ -18,59 +20,18 @@ const NavBar = () => {
   }
 
   return (
-    <div className="flex bg-gradient-to-br px-2  fixed z-50 w-full from-cyan-400 to-blue-500 text-white  shadow-sm ">
+    <div className="flex fixed z-50 w-full bg-gradient-to-br px-2   from-cyan-400 to-blue-500 text-white  shadow-sm ">
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {" "}
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />{" "}
-            </svg>
-          </div>
-          <ul
-            tabIndex="-1"
-            className="menu nav2 menu-sm text-white  dropdown-content  rounded-box z-1 mt-3 w-52 p-2 shadow"
-          >
-            <li>
-              <NavLink to="/">Home</NavLink>
-            </li>
-            {!user && (
-              <>
-                <li>
-                  <NavLink to="/auth/employee-registration">
-                    Join as Employee
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/auth/HR-registration">Join as HR</NavLink>
-                </li>
-              </>
-            )}
-            {user && (
-              <li>
-                <NavLink to="/dash">Dashboard</NavLink>
-              </li>
-            )}
-          </ul>
+      
+          <NavDropdown/>
         </div>
 
-        <NavLink to="/" className="btn btn-ghost  text-white text-xl p-0">
-          AssetVerse
+        <NavLink to="/" className="btn btn-ghost  text-white text-xl p-0">Asset<span className="text-black -ml-1.5">Verse</span>
         </NavLink>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu nav2 menu-horizontal text-white px-1">
+        <ul className="menu nav2 menu-horizontal bg-gray-500/30 p-0 backdrop-blur-lg rounded-full text-white ">
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
@@ -95,16 +56,13 @@ const NavBar = () => {
       </div>
       <div className="navbar-end">
         {user ? (
-          <button
-            onClick={handleSignOut}
-            className="btn btn-neutral hover:scale-105 transition-all duration-300"
-          >
-            Logout
-          </button>
+          <Button onClick={handleSignOut}>
+            Log out
+          </Button>
         ) : (
           <Link
             to="/auth/login"
-            className="btn btn-neutral hover:scale-105 transition-all duration-300"
+            className="btn btn-neutral my-1 hover:scale-105 transition-all duration-300"
           >
             Login
           </Link>

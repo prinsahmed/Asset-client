@@ -34,9 +34,9 @@ const PricingCard = () => {
       </div>
     );
 
-  const Basic = assets[0];
-  const Standard = assets[1];
-  const Premium = assets[2];
+  const Premium = assets[0];
+  const Basic = assets[1];
+  const Standard = assets[2];
 
   function handleUpgrade(id) {
     if (!user) navigate("/auth/login");
@@ -51,9 +51,11 @@ const PricingCard = () => {
     });
   }
 
+
+
   return (
     <div>
-      <h2 className="text-3xl text-center font-extrabold text-gray-900 pt-20 mb-13">
+      <h2 className="text-3xl text-center font-extrabold text-gray-900 pt-10 lg:pt-24 md:pt-20 lg:mb-13 md:mb-8 mb-4">
         Upgrade Package
       </h2>
       <div className=" mx-auto ">
