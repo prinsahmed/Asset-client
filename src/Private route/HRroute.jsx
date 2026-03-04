@@ -7,7 +7,6 @@ import loadingAnimation from '../assets/Gears Lottie Animation.json'
 
 const HRroute = ({ children }) => {
     const { userData, user, loading } = useContext(AuthContext)
-
     if (loading) return <div className=' h-dvh flex justify-center items-center '>
         <Lottie style={{ width: 400, height: 400 }} animationData={loadingAnimation} loop={true} />
     </div>

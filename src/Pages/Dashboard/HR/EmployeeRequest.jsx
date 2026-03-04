@@ -7,6 +7,7 @@ import CardAnimation from "../../../Components/Animations/CardAnimation";
 import Lottie from "lottie-react";
 import loadingAnimation from "../../../assets/Gears Lottie Animation.json";
 import { UserCheck, UserX, Calendar, Briefcase, Mail } from "lucide-react";
+import StatusBadge from "../../../Components/Status/StatusBadge";
 
 const EmployeeRequest = () => {
   const axiosSecure = useAxios();

@@ -19,7 +19,7 @@ const MyProfileEmplyee = () => {
   const axiosSecure = useAxios();
 
   function onSubmit(data) {
-    const imageFile = data.userPhoto?.[0] || null;
+    const imageFile = data.userPhoto?.[0];
 
     if (imageFile) {
       const formData = new FormData();
@@ -27,7 +27,7 @@ const MyProfileEmplyee = () => {
 
       axios
         .post(
-          `https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_IMAGE_FILE_KEY}`,
+          `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_FILE_KEY}`,
           formData,
         )
         .then((res) => {
@@ -64,7 +64,7 @@ const MyProfileEmplyee = () => {
       axiosSecure
         .post(`/profile-update?email=${user?.email}`, UserData)
         .then((res) => {
-          if (res.data.modifiedCount) {
+          if (res.data.modifiedCount === 1) {
             Swal.fire({
               position: "top-end",
               icon: "success",
@@ -78,173 +78,175 @@ const MyProfileEmplyee = () => {
     }
   }
 
-  return (<>
-  <title>Profile | AssetVerse</title>
-    <CardAnimation
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3, delay: 0 }}
-      className="min-h-screen  p-4 md:p-8"
-    >
-      <div className="max-w-4xl mx-auto">
-        {/* Header Section */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-800">Edit Profile</h1>
-          <p className="text-gray-500">
-            Update your personal and professional information.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Column: Static Identity Card */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 ">
-              <div className="text-center">
-                <div className="relative inline-block ">
-                  <img
-                    src={userData?.userImage}
-                    alt="Profile"
-                    className="w-32 h-32 rounded-full border-4  border-blue-50 object-cover mx-auto"
-                  />
-                  <span className="absolute bottom-2 right-2 bg-green-500 border-2 border-white w-5 h-5 rounded-full"></span>
-                </div>
-              </div>
-              <h2 className="mt-4 text-xl font-bold text-center text-gray-800">
-                {userData?.name}
-              </h2>
-              <p className="text-blue-600 font-medium text-center mb-2 text-sm capitalize">
-                {userData?.role || "HR Manager"}
-              </p>
-
-              <p className=" text-gray-400 text-sm capitalize">
-                Company: {userData.companyName}
-              </p>
-
-              <button
-                onClick={() => setIsImage(true)}
-                className="w-full mt-6 bg-blue-50 text-blue-600 hover:bg-blue-100 py-2 rounded-xl transition-all font-semibold"
-              >
-                Change Photo
-              </button>
-            </div>
+  return (
+    <>
+      <title>Profile | AssetVerse</title>
+      <CardAnimation
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: 0 }}
+        className="min-h-screen  p-4 md:p-8"
+      >
+        <div className="max-w-4xl mx-auto">
+          {/* Header Section */}
+          <div className="mb-8">
+            <h1 className="text-2xl font-bold text-gray-800">Edit Profile</h1>
+            <p className="text-gray-500">
+              Update your personal and professional information.
+            </p>
           </div>
 
-          {/* Right Column: Full Form Section */}
-          <div className="lg:col-span-2 space-y-6">
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              {/* Personal & Work Information Card */}
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-                <h3 className="text-lg font-bold text-gray-800 mb-6 border-b pb-4">
-                  Profile Details
-                </h3>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  {/* Name */}
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text font-bold text-gray-600">
-                        Full Name
-                      </span>
-                    </label>
-                    <Input
-                      type="text"
-                      defaultValue={userData?.name}
-                      register={register}
-                      name="name"
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Left Column: Static Identity Card */}
+            <div className="lg:col-span-1">
+              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 ">
+                <div className="text-center">
+                  <div className="relative inline-block ">
+                    <img
+                      src={userData?.userImage}
+                      alt="Profile"
+                      className="w-32 h-32 rounded-full border-4  border-blue-50 object-cover mx-auto"
                     />
+                    <span className="absolute bottom-2 right-2 bg-green-500 border-2 border-white w-5 h-5 rounded-full"></span>
                   </div>
+                </div>
+                <h2 className="mt-4 text-xl font-bold text-center text-gray-800">
+                  {userData?.name}
+                </h2>
+                <p className="text-blue-600 font-medium text-center mb-2 text-sm capitalize">
+                  {userData?.role || "HR Manager"}
+                </p>
 
-                  {/* Email (Read Only) */}
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text font-bold text-gray-600">
-                        Email Address
-                      </span>
-                    </label>
-                    <input
-                      type="email"
-                      defaultValue={userData?.email}
-                      disabled
-                      className="w-full focus:border-none duration-300  bg-white border border-gray-200 rounded-2xl py-2 px-4 focus:ring-3 focus:ring-sky-500 outline-none transition-all"
-                    />
-                  </div>
+                <p className=" text-gray-400 text-sm capitalize">
+                  Company: {userData.companyName}
+                </p>
 
-                  {/* Date of Birth (Now Editable) */}
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text font-bold text-gray-600">
-                        Date of Birth
-                      </span>
-                    </label>
-                    <DatePicker
-                      defaultValue={userData.dateOfBirth}
-                      className="focus:border-none duration-300  bg-white border border-gray-200 rounded-2xl py-2 px-4 focus:ring-3 focus:ring-sky-500 outline-none transition-all w-[250px]"
-                      showIcon
-                      selected={selectedDate}
-                      onChange={setSelectedDate}
-                    />
-                  </div>
+                <button
+                  onClick={() => setIsImage(true)}
+                  className="w-full mt-6 bg-blue-50 text-blue-600 hover:bg-blue-100 py-2 rounded-xl transition-all font-semibold"
+                >
+                  Change Photo
+                </button>
+              </div>
+            </div>
 
-                  {/* Phone */}
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text font-bold text-gray-600">
-                        Phone Number
-                      </span>
-                    </label>
-                    <Input
-                      type="number"
-                      placeholder="+880"
-                      defaultValue={userData?.phoneNumber}
-                      name="phoneNumber"
-                      register={register}
-                    />
-                  </div>
+            {/* Right Column: Full Form Section */}
+            <div className="lg:col-span-2 space-y-6">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                {/* Personal & Work Information Card */}
+                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+                  <h3 className="text-lg font-bold text-gray-800 mb-6 border-b pb-4">
+                    Profile Details
+                  </h3>
 
-                  {/* Location */}
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text font-bold text-gray-600">
-                        Location
-                      </span>
-                    </label>
-                    <Input
-                      type="text"
-                      placeholder="City, Country"
-                      defaultValue={userData?.location}
-                      name="location"
-                      register={register}
-                    />
-                  </div>
-                  {/* image */}
-                  {isImage && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    {/* Name */}
                     <div className="form-control">
                       <label className="label">
                         <span className="label-text font-bold text-gray-600">
-                          Image
+                          Full Name
+                        </span>
+                      </label>
+                      <Input
+                        type="text"
+                        defaultValue={userData?.name}
+                        register={register}
+                        name="name"
+                      />
+                    </div>
+
+                    {/* Email (Read Only) */}
+                    <div className="form-control">
+                      <label className="label">
+                        <span className="label-text font-bold text-gray-600">
+                          Email Address
                         </span>
                       </label>
                       <input
-                        type="file"
-                        {...register("userPhoto")}
+                        type="email"
+                        defaultValue={userData?.email}
+                        disabled
                         className="w-full focus:border-none duration-300  bg-white border border-gray-200 rounded-2xl py-2 px-4 focus:ring-3 focus:ring-sky-500 outline-none transition-all"
                       />
                     </div>
-                  )}
-                </div>
 
-                <div className="mt-10 pt-6 border-t flex justify-end">
-                  <Button className="btn btn-primary px-10 rounded-xl shadow-lg shadow-blue-200">
-                    Save Changes
-                  </Button>
+                    {/* Date of Birth (Now Editable) */}
+                    <div className="form-control">
+                      <label className="label">
+                        <span className="label-text font-bold text-gray-600">
+                          Date of Birth
+                        </span>
+                      </label>
+                      <DatePicker
+                        defaultValue={userData.dateOfBirth}
+                        className="focus:border-none duration-300  bg-white border border-gray-200 rounded-2xl py-2 px-4 focus:ring-3 focus:ring-sky-500 outline-none transition-all w-[250px]"
+                        showIcon
+                        selected={selectedDate}
+                        onChange={setSelectedDate}
+                      />
+                    </div>
+
+                    {/* Phone */}
+                    <div className="form-control">
+                      <label className="label">
+                        <span className="label-text font-bold text-gray-600">
+                          Phone Number
+                        </span>
+                      </label>
+                      <Input
+                        type="number"
+                        placeholder="+880"
+                        defaultValue={userData?.phoneNumber}
+                        name="phoneNumber"
+                        register={register}
+                      />
+                    </div>
+
+                    {/* Location */}
+                    <div className="form-control">
+                      <label className="label">
+                        <span className="label-text font-bold text-gray-600">
+                          Location
+                        </span>
+                      </label>
+                      <Input
+                        type="text"
+                        placeholder="City, Country"
+                        defaultValue={userData?.location}
+                        name="location"
+                        register={register}
+                      />
+                    </div>
+                    {/* image */}
+                    {isImage && (
+                      <div className="form-control">
+                        <label className="label">
+                          <span className="label-text font-bold text-gray-600">
+                            Image
+                          </span>
+                        </label>
+                        <input
+                          type="file"
+                          {...register("userPhoto")}
+                          className="w-full focus:border-none duration-300  bg-white border border-gray-200 rounded-2xl py-2 px-4 focus:ring-3 focus:ring-sky-500 outline-none transition-all"
+                        />
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="mt-10 pt-6 border-t flex justify-end">
+                    <Button className="btn btn-primary px-10 rounded-xl shadow-lg shadow-blue-200">
+                      Save Changes
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-    </CardAnimation>
-  </>
-)};
+      </CardAnimation>
+    </>
+  );
+};
 
 export default MyProfileEmplyee;

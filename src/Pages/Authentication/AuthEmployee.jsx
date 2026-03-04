@@ -26,7 +26,7 @@ const AuthEmployee = () => {
     },
   });
 
-  const { signInEmail } = useContext(AuthContext);
+  const { signInEmail, setReload } = useContext(AuthContext);
   const axiosSecure = useAxios();
   const navigate = useNavigate();
 
@@ -39,6 +39,7 @@ const AuthEmployee = () => {
 
     signInEmail(data.email, data.password)
       .then((res) => {
+        setReload(true);
         if (res) {
           axiosSecure.post("/user-employee", data).then((res) => {
             if (res.data.insertedId) {

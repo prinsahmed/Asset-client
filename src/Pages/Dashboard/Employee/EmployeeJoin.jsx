@@ -24,9 +24,9 @@ const EmployeeJoin = () => {
         formData,
       )
       .then((res) => {
-        const user = {
+        const userData = {
           employeeName: data.employeeName,
-          employeeEmail: data.UserEmail,
+          employeeEmail: user?.email,
           hrEmail: data.HrEmail,
           affiliationDate: new Date(),
           approvalDate: null,
@@ -35,7 +35,7 @@ const EmployeeJoin = () => {
         };
 
         axiosSecure
-          .post("/employee-join", user)
+          .post("/employee-join", userData)
           .catch((err) => console.log(err.message));
 
         if (res) {
@@ -53,76 +53,74 @@ const EmployeeJoin = () => {
 
   return (
     <>
-    <title>Join-Team | AssetVerse</title>
-    <CardAnimation
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3, delay: 0 }}
-      className="min-h-screen  p-4 rounded-3xl md:shadow-xl"
-    >
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-2xl font-semibold mb-1 text-gray-800">
-          Join a Company
-        </h1>
+      <title>Join-Team | AssetVerse</title>
+      <CardAnimation
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: 0 }}
+        className="min-h-screen  p-4 rounded-3xl md:shadow-xl"
+      >
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-2xl font-semibold mb-1 text-gray-800">
+            Join a Company
+          </h1>
 
-        <div>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
-          >
-            <div className="flex flex-col gap-1">
-              <label className="font-semibold">Name</label>
-              <Input
-                type="text"
-                name="employeeName"
-                register={register}
-                placeholder="Name"
-              />
-            </div>
+          <div>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            >
+              <div className="flex flex-col gap-1">
+                <label className="font-semibold">Name</label>
+                <Input
+                  type="text"
+                  name="employeeName"
+                  register={register}
+                  placeholder="Name"
+                />
+              </div>
 
-            <div className="flex flex-col gap-1">
-              <label className="font-semibold">Email</label>
-              <input
-                type="email"
-                defaultValue={user?.email}
-                name="UserEmail"
-                register={register}
-                disabled
-                className="input w-full focus:outline-sky-500 focus:border-none focus:duration-80"
-                placeholder="Email"
-              />
-            </div>
+              <div className="flex flex-col gap-1">
+                <label className="font-semibold">Email</label>
+                <input
+                  type="email"
+                  defaultValue={user?.email}
+                  disabled
+                  className="w-full focus:border-none duration-300  bg-white border border-gray-200 rounded-2xl py-2 px-4 focus:ring-3 focus:ring-sky-500 outline-none transition-all"
+                  placeholder="Email"
+                />
+              </div>
 
-            <div className="flex flex-col gap-1">
-              <label className="font-semibold">Image</label>
-              <Input
-                type="file"
-                name="userImage"
-                register={register}
-                placeholder="Email"
-                className="w-full focus:border-none duration-300  bg-white border border-gray-200 rounded-2xl py-2 px-4 focus:ring-3 focus:ring-sky-500 outline-none transition-all "
-              />
-            </div>
+              <div className="flex flex-col gap-1">
+                <label className="font-semibold">Image</label>
+                <Input
+                  type="file"
+                  name="userImage"
+                  register={register}
+                  placeholder="Email"
+                  className="w-full focus:border-none duration-300  bg-white border border-gray-200 rounded-2xl py-2 px-4 focus:ring-3 focus:ring-sky-500 outline-none transition-all "
+                />
+              </div>
 
-            <div className="flex flex-col gap-1">
-              <label className="font-semibold">HR Email</label>
-              <Input
-                type="email"
-                name="HrEmail"
-                register={register}
-                placeholder="Email"
-              />
-            </div>
+              <div className="flex flex-col gap-1">
+                <label className="font-semibold">HR Email</label>
+                <Input
+                  type="email"
+                  name="HrEmail"
+                  register={register}
+                  placeholder="Email"
+                />
+              </div>
 
-            <div className="col-span-1 md:col-span-2 flex justify-end">
-              <Button className="btn btn-neutral w-full md:w-48 mt-4">
-               Request to Join
-              </Button>
-            </div>
-          </form>
+              <div className="col-span-1 md:col-span-2 flex justify-end">
+                <Button className="btn btn-neutral w-full md:w-48 mt-4">
+                  Request to Join
+                </Button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-    </CardAnimation>
+      </CardAnimation>
     </>
   );
 };

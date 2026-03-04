@@ -54,7 +54,7 @@ const EditAsset = () => {
               Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: "Successfully Added",
+                title: "Successfully Edited",
                 showConfirmButton: false,
                 timer: 1000,
               });

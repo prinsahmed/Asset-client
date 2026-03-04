@@ -5,7 +5,7 @@ import Lottie from 'lottie-react';
 
 
 const EmployeeRoute = ({ children }) => {
-    const { user, userData, loading } = useContext(AuthContext);
+    const { user, userData, loading} = useContext(AuthContext);
 
 
     if (loading) return <div className=' h-dvh flex justify-center items-center '>

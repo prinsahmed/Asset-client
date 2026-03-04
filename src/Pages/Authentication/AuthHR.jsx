@@ -14,7 +14,7 @@ import { useAxios } from "../../Hooks/Api/useAxios";
 import CardAnimation from "../../Components/Animations/CardAnimation";
 
 const AuthHR = () => {
-  const { signInEmail } = useContext(AuthContext);
+  const { signInEmail, setReload } = useContext(AuthContext);
   const [viewPass, setViewPass] = useState(false);
 
   const {
@@ -58,6 +58,7 @@ const AuthHR = () => {
 
         signInEmail(data.email, data.password).then(() => {
           axiosSecure.post("/user-HR", HRData).then((res) => {
+            setReload(true);
             if (res.data.insertedId) {
               Swal.fire({
                 icon: "success",

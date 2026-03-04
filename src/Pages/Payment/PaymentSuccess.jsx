@@ -23,7 +23,7 @@ const PaymentSuccess = () => {
     if (sessionId) {
       mutation.mutate(sessionId);
     }
-  }, [sessionId]);
+  }, [sessionId, mutation]);
 
   if (mutation.isPending) {
     return (
@@ -63,7 +63,7 @@ const PaymentSuccess = () => {
         transition={{ duration: 0.5 }}
         className="max-w-md w-full bg-white rounded-3xl shadow-2xl overflow-hidden"
       >
-        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-8 text-center relative">
+        <div className="bg-linear-to-r from-blue-600 to-indigo-600 p-8 text-center relative">
           <CardAnimation
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}

@@ -26,13 +26,12 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
 
       if (currentUser?.email) {
-        axiosSecure.post("jwt", { email: currentUser?.email }).then((res) => {
+        axiosSecure.post("/jwt", { email: currentUser?.email }).then((res) => {
           if (res.data.token) {
             localStorage.setItem("access-token", res.data.token);
           } else {
             localStorage.removeItem("access-token");
           }
-
           axiosSecure
             .get(`/user-data?email=${currentUser?.email}`)
             .then((res) => {
@@ -42,7 +41,7 @@ const AuthProvider = ({ children }) => {
             .catch((error) => {
               Swal.fire({
                 icon: "error",
-                title: "Registration Failed",
+                title: "Something went wrong!",
                 text: error.message,
                 confirmButtonColor: "#4f46e5",
               });
