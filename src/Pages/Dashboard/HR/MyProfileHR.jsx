@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import DatePicker from "react-datepicker";
 import CardAnimation from "../../../Components/Animations/CardAnimation";
 import Input from "../../../Components/Input/Input";
+import Button from "../../../Components/Button/Button";
 
 const MyProfileHR = () => {
   const { userData, user } = useContext(AuthContext);
@@ -26,7 +27,7 @@ const MyProfileHR = () => {
 
       axios
         .post(
-          `https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_IMAGE_FILE_KEY}`,
+          `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_FILE_KEY}`,
           formData,
         )
         .then((res) => {
@@ -78,6 +79,8 @@ const MyProfileHR = () => {
   }
 
   return (
+    <>
+    <title>Profile | AssetVerse</title>
     <CardAnimation
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
@@ -85,7 +88,7 @@ const MyProfileHR = () => {
       className="min-h-screen  p-4 md:p-8"
     >
       <div className="max-w-4xl mx-auto">
-        {/* Header Section */}
+        
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-gray-800">Edit Profile</h1>
           <p className="text-gray-500">
@@ -94,7 +97,7 @@ const MyProfileHR = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Column: Static Identity Card */}
+          
           <div className="lg:col-span-1">
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 ">
               <div className="text-center">
@@ -133,17 +136,17 @@ const MyProfileHR = () => {
             </div>
           </div>
 
-          {/* Right Column: Full Form Section */}
+          
           <div className="lg:col-span-2 space-y-6">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              {/* Personal & Work Information Card */}
+              
               <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
                 <h3 className="text-lg font-bold text-gray-800 mb-6 border-b pb-4">
                   Profile Details
                 </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  {/* Name */}
+                 
                   <div className="form-control">
                     <label className="label">
                       <span className="label-text font-bold text-gray-600">
@@ -159,7 +162,7 @@ const MyProfileHR = () => {
                     />
                   </div>
 
-                  {/* Email (Read Only) */}
+                
                   <div className="form-control">
                     <label className="label">
                       <span className="label-text font-bold text-gray-600">
@@ -171,11 +174,11 @@ const MyProfileHR = () => {
                       type="email"
                       defaultValue={userData?.email}
                       disabled
-                      className="input focus:outline-sky-500 focus:border-none focus:duration-80  cursor-not-allowed w-full"
+                      className="w-full focus:border-none duration-300  bg-white border border-gray-200 rounded-2xl py-2 px-4 focus:ring-3 focus:ring-sky-500 outline-none transition-all"
                     />
                   </div>
 
-                  {/* Date of Birth (Now Editable) */}
+                  
                   <div className="form-control">
                     <label className="label">
                       <span className="label-text font-bold text-gray-600">
@@ -184,14 +187,14 @@ const MyProfileHR = () => {
                     </label>
                     <DatePicker
                       defaultValue={userData.dateOfBirth}
-                      className="input focus:outline-sky-500 focus:border-none focus:duration-80   w-[250px]"
+                      className="focus:border-none duration-300  bg-white border border-gray-200 rounded-2xl py-2 px-4 focus:ring-3 focus:ring-sky-500 outline-none transition-all   w-[250px]"
                       showIcon
                       selected={selectedDate}
                       onChange={setSelectedDate}
                     />
                   </div>
 
-                  {/* Phone */}
+                  
                   <div className="form-control">
                     <label className="label">
                       <span className="label-text font-bold text-gray-600">
@@ -207,7 +210,7 @@ const MyProfileHR = () => {
                     />
                   </div>
 
-                  {/* Location */}
+                 
                   <div className="form-control">
                     <label className="label">
                       <span className="label-text font-bold text-gray-600">
@@ -222,7 +225,7 @@ const MyProfileHR = () => {
                       placeholder="City, Country"
                     />
                   </div>
-                  {/* image */}
+                 
                   {isImage && (
                     <div className="form-control">
                       <label className="label">
@@ -234,16 +237,16 @@ const MyProfileHR = () => {
                         type="file"
                         name="userPhoto"
                         register={register}
-                        className="file-input file-input-bordered file-input-info"
+                        className="w-full focus:border-none duration-300  bg-white border border-gray-200 rounded-2xl py-2 px-4 focus:ring-3 focus:ring-sky-500 outline-none transition-all "
                       />
                     </div>
                   )}
                 </div>
 
                 <div className="mt-10 pt-6 border-t flex justify-end">
-                  <button className="btn btn-primary px-10 rounded-xl shadow-lg shadow-blue-200">
+                  <Button className="btn btn-primary px-10 rounded-xl shadow-lg shadow-blue-200">
                     Save Changes
-                  </button>
+                  </Button>
                 </div>
               </div>
             </form>
@@ -251,6 +254,7 @@ const MyProfileHR = () => {
         </div>
       </div>
     </CardAnimation>
+    </>
   );
 };
 

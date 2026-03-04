@@ -57,6 +57,8 @@ const EmployeeList = () => {
 
 
   return (
+    <>
+    <title>Employee-List | AssetVerse</title>
     <CardAnimation
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
@@ -222,6 +224,7 @@ const EmployeeList = () => {
         )}
       </div>
     </CardAnimation>
+    </>
   );
 };
 

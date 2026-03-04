@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+
+
 * {
   box-sizing: border-box;
 }
@@ -17,7 +19,6 @@ body {
   background-color: white;
   border-radius: 30px 30px;
   background: rgba(255, 255, 255, 0.816);
- 
 }
 
 .nav2 li .active {

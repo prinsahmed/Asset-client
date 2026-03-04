@@ -6,6 +6,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import CardAnimation from "../../../Components/Animations/CardAnimation";
 import Input from "../../../Components/Input/Input";
+import Button from "../../../Components/Button/Button";
 
 const EmployeeJoin = () => {
   const { register, handleSubmit } = useForm();
@@ -19,7 +20,7 @@ const EmployeeJoin = () => {
 
     axios
       .post(
-        `https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_IMAGE_FILE_KEY}`,
+        `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_FILE_KEY}`,
         formData,
       )
       .then((res) => {
@@ -51,18 +52,20 @@ const EmployeeJoin = () => {
   }
 
   return (
+    <>
+    <title>Join-Team | AssetVerse</title>
     <CardAnimation
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: 0 }}
-      className="min-h-screen  p-4"
+      className="min-h-screen  p-4 rounded-3xl md:shadow-xl"
     >
       <div className="max-w-7xl mx-auto">
         <h1 className="text-2xl font-semibold mb-1 text-gray-800">
           Join a Company
         </h1>
 
-        <div className="bg-white">
+        <div>
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="grid grid-cols-1 md:grid-cols-2 gap-6"
@@ -97,7 +100,7 @@ const EmployeeJoin = () => {
                 name="userImage"
                 register={register}
                 placeholder="Email"
-                className="file-input file-input-bordered file-input-info"
+                className="w-full focus:border-none duration-300  bg-white border border-gray-200 rounded-2xl py-2 px-4 focus:ring-3 focus:ring-sky-500 outline-none transition-all "
               />
             </div>
 
@@ -112,14 +115,15 @@ const EmployeeJoin = () => {
             </div>
 
             <div className="col-span-1 md:col-span-2 flex justify-end">
-              <button className="btn btn-neutral w-full md:w-48 mt-4">
-                Join
-              </button>
+              <Button className="btn btn-neutral w-full md:w-48 mt-4">
+               Request to Join
+              </Button>
             </div>
           </form>
         </div>
       </div>
     </CardAnimation>
+    </>
   );
 };
 

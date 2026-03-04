@@ -9,11 +9,9 @@ import loadingAnimation from "../../../assets/Gears Lottie Animation.json";
 import { Edit, Trash2, Search, Package } from "lucide-react";
 import { useDebounce } from "use-debounce";
 
-
-
 const AssetList = () => {
   const [searchText, setSearchText] = useState("");
-  const [debouncedSearch] = useDebounce(searchText, 1000)
+  const [debouncedSearch] = useDebounce(searchText, 1000);
   const axiosSecure = useAxios();
   const { user } = useContext(AuthContext);
 
@@ -32,9 +30,7 @@ const AssetList = () => {
     enabled: !!user?.email,
   });
 
-
   const handleDelete = (id) => {
-
     axiosSecure
       .delete(`/all-asset/delete/${id}`)
       .then(() => refetch())
@@ -54,6 +50,8 @@ const AssetList = () => {
   }
 
   return (
+    <>
+    <title>Asset-List | AssetVerse</title>
     <CardAnimation
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
@@ -61,7 +59,6 @@ const AssetList = () => {
       className="min-h-screen p-4 lg:p-6"
     >
       <div className="max-w-7xl mx-auto">
-        {/* --- HEADER SECTION --- */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
           <div>
             <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
@@ -79,18 +76,18 @@ const AssetList = () => {
               size={18}
             />
             <input
-              onChange={(e)=> setSearchText(e.target.value)}
+              onChange={(e) => setSearchText(e.target.value)}
               value={searchText}
               type="text"
               placeholder="Search by name..."
-              className="input input-bordered w-full pl-10 focus:border-cyan-500"
+              className="w-full focus:border-none duration-300  bg-white border border-gray-200 rounded-2xl py-2 pl-9 focus:ring-3 focus:ring-sky-500 outline-none transition-all "
             />
           </div>
         </div>
 
         {/* --- CONTENT SECTION --- */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-          {/* 1. DESKTOP TABLE */}
+          
           <div className="hidden md:block overflow-x-auto">
             <table className="table w-full">
               <thead className="bg-gray-50 text-gray-600 border-b border-gray-100">
@@ -230,6 +227,7 @@ const AssetList = () => {
         )}
       </div>
     </CardAnimation>
+    </>
   );
 };
 

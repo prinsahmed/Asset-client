@@ -20,7 +20,7 @@ const NavBar = () => {
   }
 
   return (
-    <div className="flex fixed z-50 w-full bg-gradient-to-br px-2   from-cyan-400 to-blue-500 text-white  shadow-sm ">
+    <div className="flex fixed z-50 w-full bg-linear-to-br px-2   from-cyan-400 to-blue-500 text-white  shadow-sm ">
       <div className="navbar-start">
         <div className="dropdown">
       
@@ -31,7 +31,7 @@ const NavBar = () => {
         </NavLink>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu nav2 menu-horizontal bg-gray-500/30 p-0 backdrop-blur-lg rounded-full text-white ">
+        <ul className="menu nav2 menu-horizontal bg-gray-400/30 p-0 shadow-lg  backdrop-blur-lg rounded-full text-white ">
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
@@ -56,9 +56,9 @@ const NavBar = () => {
       </div>
       <div className="navbar-end">
         {user ? (
-          <Button onClick={handleSignOut}>
+          <button className='btn btn-neutral my-1 hover:scale-105 transition-all duration-300' onClick={handleSignOut}>
             Log out
-          </Button>
+          </button>
         ) : (
           <Link
             to="/auth/login"

@@ -20,7 +20,9 @@ const AllRequests = () => {
   } = useQuery({
     queryKey: ["userEmail", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/all-requests?email=${user?.email}`);
+      const res = await axiosSecure.get(
+        `/all-assets-requests?email=${user?.email}`,
+      );
       return res.data;
     },
     enabled: !!user?.email,
@@ -77,6 +79,8 @@ const AllRequests = () => {
   }
 
   return (
+    <>
+    <title>All-Request | AssetVerse</title>
     <CardAnimation
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
@@ -222,12 +226,9 @@ const AllRequests = () => {
         </div>
       </div>
     </CardAnimation>
+    </>
   );
 };
-
-
-
-
 
 const ActionButtons = ({ status, onApprove, onReject, isMobile = false }) => {
   if (status !== "pending") {

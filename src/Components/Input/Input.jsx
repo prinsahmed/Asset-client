@@ -7,16 +7,14 @@ const Input = ({
   register,
   className,
   defaultValue,
-  disabled
 }) => {
   return (
     <input
       type={type}
       defaultValue={defaultValue}
-      {...disabled}
       {...(register ? register(name) : {})}
       required
-      className={`input w-full focus:outline-sky-500 focus:border-none focus:duration-80 ${className}`}
+      className={` w-full focus:border-none duration-300  bg-white border border-gray-200 rounded-2xl py-2 px-4 focus:ring-3 focus:ring-sky-500 outline-none transition-all ${className}`}
       placeholder={placeholder}
     />
   );

@@ -8,8 +8,8 @@ const SidebarLink = ({ to, icon, label, setIsOpen }) => (
       className={({ isActive }) =>
         `flex items-center gap-3 p-3 rounded-xl transition-all ${
           isActive
-            ? "bg-cyan-600 text-white shadow-lg shadow-cyan-200"
-            : "hover:bg-cyan-50 hover:text-cyan-700 text-gray-500"
+            ? "bg-sky-500 text-white shadow-lg shadow-sky-200"
+            : "hover:bg-sky-50 hover:text-sky-700 text-gray-500"
         }`
       }
     >

@@ -80,11 +80,13 @@ const EmployeeAssets = () => {
     );
 
   return (
+    <>
+    <title>My-Assets | AssetVerse</title>
     <CardAnimation
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="max-w-7xl mx-auto min-h-screen p-4 lg:p-6"
+      className="max-w-7xl mx-auto min-h-screen p-4 lg:p-6 rounded-3xl shadow-xl"
     >
       {/* --- HEADER SECTION --- */}
       <div className="mb-8">
@@ -267,6 +269,7 @@ const EmployeeAssets = () => {
         </div>
       </div>
     </CardAnimation>
+    </>
   );
 };
 

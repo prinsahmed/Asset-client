@@ -34,8 +34,6 @@ const EmployeeAssetsRequest = () => {
     enabled: !!user?.email,
   });
 
-
-
   const handleRequest = (
     id,
     companyName,
@@ -95,11 +93,13 @@ const EmployeeAssetsRequest = () => {
     );
 
   return (
+    <>
+    <title>Assets-Request | AssetVerse</title>
     <CardAnimation
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen p-4 lg:p-10 bg-[#fcfcfd]"
+      className="min-h-screen p-4 lg:p-10 shadow-xl rounded-3xl"
     >
       {/* --- HERO HEADER SECTION --- */}
       <div className="max-w-7xl mx-auto mb-12">
@@ -118,8 +118,8 @@ const EmployeeAssetsRequest = () => {
           </div>
 
           {/* Search & Filter UI Bar */}
-          <div className="flex flex-col sm:flex-row gap-4 p-2 bg-white rounded-[2rem] shadow-sm border border-gray-100 w-full lg:w-auto">
-            <div className="relative flex-grow sm:flex-grow-0">
+          <div className="flex flex-col sm:flex-row gap-4 p-2 bg-white rounded-4xl shadow-sm border border-gray-100 w-full lg:w-auto">
+            <div className="relative grow sm:grow-0">
               <Search
                 className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
                 size={18}
@@ -131,7 +131,7 @@ const EmployeeAssetsRequest = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            <div className="h-10 w-[1px] bg-gray-100 hidden sm:block"></div>
+            <div className="h-10 w-px bg-gray-100 hidden sm:block"></div>
             <select
               className="select select-ghost focus:bg-transparent focus:outline-none font-bold text-gray-600"
               onChange={(e) => setFilterType(e.target.value)}
@@ -156,7 +156,7 @@ const EmployeeAssetsRequest = () => {
                 className="group relative bg-white rounded-[2.5rem] p-3 pb-7 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:shadow-[0_30px_60px_rgba(79,70,229,0.12)] transition-all duration-700 border border-gray-100/50 hover:border-indigo-100 flex flex-col h-full"
               >
                 {/* Image Canvas */}
-                <div className="relative aspect-[4/5] overflow-hidden rounded-[2.2rem] bg-gray-50 mb-6">
+                <div className="relative aspect-4/5 overflow-hidden rounded-[2.2rem] bg-gray-50 mb-6">
                   <img
                     src={ele.productImage}
                     className={`w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 ${isStockOut ? "grayscale opacity-40" : ""}`}
@@ -177,7 +177,7 @@ const EmployeeAssetsRequest = () => {
                 </div>
 
                 {/* Details Container */}
-                <div className="px-4 flex flex-col flex-grow">
+                <div className="px-4 flex flex-col grow">
                   <div className="mb-6">
                     <div className="flex items-center gap-2 mb-2">
                       <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
@@ -203,7 +203,7 @@ const EmployeeAssetsRequest = () => {
                           {ele.productQuantity} Units
                         </span>
                       </div>
-                      <div className="h-8 w-[1px] bg-gray-200"></div>
+                      <div className="h-8 w-px bg-gray-200"></div>
                       <div className="text-right">
                         <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest block mb-0.5">
                           Reference
@@ -284,6 +284,7 @@ const EmployeeAssetsRequest = () => {
         )}
       </div>
     </CardAnimation>
+    </>
   );
 };
 

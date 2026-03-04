@@ -13,6 +13,7 @@ import PricingCard from '../../Components/Homepage/PricingCard';
 const HomePage = () => {
     return (
         <>
+        <title>Home | AssetVerse</title>
             <Banner />
             <main>
                <div className='w-11/12 mx-auto'> 

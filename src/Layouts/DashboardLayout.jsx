@@ -1,19 +1,29 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { FaFileSignature, FaList } from "react-icons/fa";
 import { ImProfile } from "react-icons/im";
 import { IoBagAdd } from "react-icons/io5";
-import { MdOutlineProductionQuantityLimits, MdWebAsset } from "react-icons/md";
 import { RiTeamFill } from "react-icons/ri";
-import { NavLink, Outlet } from "react-router";
+import { Outlet } from "react-router";
 import { AuthContext } from "../Context/Context";
-import { ChevronDown, Home, Menu, X } from "lucide-react";
+import {
+  CircleFadingArrowUp,
+  FileUser,
+  Home,
+  Menu,
+  Package,
+  PackageOpen,
+  PackagePlus,
+  PackageSearch,
+  UserPen,
+  UserPlus,
+  X,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import SidebarLink from "../Components/Navigation/SideBarLink";
 
 const DashboardLayout = () => {
-  const { userData } = useContext(AuthContext);
+  const { userData, user } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(window.innerWidth > 1024);
-
 
   return (
     <div className="flex min-h-screen bg-gray-50 overflow-hidden">
@@ -45,15 +55,15 @@ const DashboardLayout = () => {
             <div className="p-6 border-b border-gray-100 bg-gray-50/50 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <img
-                  className="w-10 h-10 rounded-full ring-2 ring-cyan-500"
-                  src={userData?.userImage}
+                  className="w-10 h-10 rounded-full ring-2 ring-sky-500"
+                  src={user?.photoURL}
                   alt="Profile"
                 />
                 <div>
                   <p className="font-bold text-gray-800 text-sm truncate w-32">
                     {userData?.name}
                   </p>
-                  <p className="text-[10px] text-cyan-600 font-bold uppercase tracking-widest">
+                  <p className="text-[10px] text-sky-500 font-bold uppercase tracking-widest">
                     {userData?.role}
                   </p>
                 </div>
@@ -68,7 +78,7 @@ const DashboardLayout = () => {
             </div>
 
             {/* Navigation Links */}
-            <ul className="menu p-4 gap-2 text-gray-600 font-medium overflow-y-auto grow">
+            <ul className="menu p-4 gap-2 text-gray-600 font-medium overflow-y-auto w-full grow">
               <SidebarLink
                 to="/"
                 icon={<Home size={20} />}
@@ -84,25 +94,25 @@ const DashboardLayout = () => {
                 <>
                   <SidebarLink
                     to="/dash/asset-list"
-                    icon={<MdWebAsset />}
+                    icon={<PackageOpen />}
                     label="Asset List"
                     setIsOpen={setIsOpen}
                   />
                   <SidebarLink
                     to="/dash/add-asset"
-                    icon={<IoBagAdd />}
+                    icon={<PackagePlus />}
                     label="Add Asset"
                     setIsOpen={setIsOpen}
                   />
                   <SidebarLink
                     to="/dash/all-request"
-                    icon={<FaFileSignature />}
+                    icon={<PackageSearch />}
                     label="Asset Requests"
                     setIsOpen={setIsOpen}
                   />
                   <SidebarLink
                     to="/dash/employee-requests"
-                    icon={<FaList />}
+                    icon={<FileUser />}
                     label="Employee Requests"
                     setIsOpen={setIsOpen}
                   />
@@ -114,13 +124,13 @@ const DashboardLayout = () => {
                   />
                   <SidebarLink
                     to="/dash/HR-package"
-                    icon={<FaList />}
+                    icon={<CircleFadingArrowUp />}
                     label="Upgrade Package"
                     setIsOpen={setIsOpen}
                   />
                   <SidebarLink
                     to="/dash/HR-profile"
-                    icon={<ImProfile />}
+                    icon={<UserPen />}
                     label="My Profile"
                     setIsOpen={setIsOpen}
                   />
@@ -131,25 +141,25 @@ const DashboardLayout = () => {
                 <>
                   <SidebarLink
                     to="/dash/employee-asset"
-                    icon={<MdOutlineProductionQuantityLimits />}
+                    icon={<Package />}
                     label="My Assets"
                     setIsOpen={setIsOpen}
                   />
                   <SidebarLink
                     to="/dash/request-asset"
-                    icon={<FaFileSignature />}
+                    icon={<PackagePlus />}
                     label="Request Asset"
                     setIsOpen={setIsOpen}
                   />
                   <SidebarLink
                     to="/dash/employee-join"
-                    icon={<FaFileSignature />}
+                    icon={<UserPlus />}
                     label="Join Team"
                     setIsOpen={setIsOpen}
                   />
                   <SidebarLink
                     to="/dash/employee-profile"
-                    icon={<ImProfile />}
+                    icon={<UserPen />}
                     label="My Profile"
                     setIsOpen={setIsOpen}
                   />
@@ -197,8 +207,5 @@ const DashboardLayout = () => {
     </div>
   );
 };
-
-
-
 
 export default DashboardLayout;

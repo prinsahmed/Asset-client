@@ -14,6 +14,7 @@ const PricingCard = () => {
   const { user, userData } = useContext(AuthContext);
 
   const { data: assets = [], isLoading } = useQuery({
+    queryKey:[],
     queryFn: async () => {
       const res = await axiosSecure.get("/upgrade-package");
       return res.data;

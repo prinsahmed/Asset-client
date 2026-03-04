@@ -10,6 +10,7 @@ import CardAnimation from "../../../Components/Animations/CardAnimation";
 import Lottie from "lottie-react";
 import loadingAnimation from "../../../assets/Gears Lottie Animation.json";
 import Input from "../../../Components/Input/Input";
+import Button from "../../../Components/Button/Button";
 
 const EditAsset = () => {
   const { register, handleSubmit } = useForm();
@@ -33,7 +34,7 @@ const EditAsset = () => {
 
     axios
       .post(
-        `https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_IMAGE_FILE_KEY}`,
+        `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_FILE_KEY}`,
         formData,
       )
       .then((res) => {
@@ -75,11 +76,13 @@ const EditAsset = () => {
     );
 
   return (
+    <>
+    <title>Edit-Asset | AssetVerse</title>
     <CardAnimation
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: 0 }}
-      className="min-h-screen  p-4"
+      className="min-h-screen  md:p-4 md:shadow-xl rounded-3xl"
     >
       <div className="max-w-7xl mx-auto">
         <h1 className="text-2xl font-bold  text-gray-800 mb-1">Edit Product</h1>
@@ -119,7 +122,7 @@ const EditAsset = () => {
                 name="ProductImage"
                 register={register}
                 placeholder="Company Name"
-                className='file-input file-input-bordered file-input-info'
+                className='w-full focus:border-none duration-300  bg-white border border-gray-200 rounded-2xl py-2 px-4 focus:ring-3 focus:ring-sky-500 outline-none transition-all '
               />
               
             </div>
@@ -130,7 +133,7 @@ const EditAsset = () => {
                 defaultValue={assets.productType}
                 {...register("productType")}
                 required
-                className="select select-bordered select-info w-full"
+                className=" select w-full focus:border-none duration-300  bg-white border border-gray-200 rounded-2xl py-2 px-4 focus:ring-3 focus:ring-sky-500 outline-none transition-all "
               >
                 <option disabled>Product Type</option>
                 <option>Returnable</option>
@@ -158,19 +161,20 @@ const EditAsset = () => {
                 defaultValue={assets.date}
                 selected={selectedDate}
                 onChange={setSelectedDate}
-                className="input focus:outline-sky-500 focus:border-none focus:duration-80 w-full"
+                className="input w-full focus:border-none duration-300  bg-white border border-gray-200 rounded-2xl py-2 px-4 focus:ring-3 focus:ring-sky-500 outline-none transition-all "
               />
             </div>
 
             <div className="col-span-1 md:col-span-2 flex justify-end">
-              <button className="btn btn-neutral w-full md:w-48 mt-4">
+              <Button className="btn btn-neutral w-full md:w-48 mt-4">
                 Edit Product
-              </button>
+              </Button>
             </div>
           </form>
         </div>
       </div>
     </CardAnimation>
+    </>
   );
 };
 

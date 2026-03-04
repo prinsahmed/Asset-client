@@ -6,6 +6,8 @@ import { useAxios } from "../../../Hooks/Api/useAxios";
 import axios from "axios";
 import CardAnimation from "../../../Components/Animations/CardAnimation";
 import DatePicker from "react-datepicker";
+import Button from "../../../Components/Button/Button";
+import Input from "../../../Components/Input/Input";
 
 const MyProfileEmplyee = () => {
   const { userData, user } = useContext(AuthContext);
@@ -76,7 +78,8 @@ const MyProfileEmplyee = () => {
     }
   }
 
-  return (
+  return (<>
+  <title>Profile | AssetVerse</title>
     <CardAnimation
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
@@ -143,11 +146,11 @@ const MyProfileEmplyee = () => {
                         Full Name
                       </span>
                     </label>
-                    <input
+                    <Input
                       type="text"
                       defaultValue={userData?.name}
-                      {...register("name")}
-                      className="input  focus:outline-sky-500 focus:border-none focus:duration-80 w-full"
+                      register={register}
+                      name="name"
                     />
                   </div>
 
@@ -162,7 +165,7 @@ const MyProfileEmplyee = () => {
                       type="email"
                       defaultValue={userData?.email}
                       disabled
-                      className="input input-bordered bg-gray-200 cursor-not-allowed w-full"
+                      className="w-full focus:border-none duration-300  bg-white border border-gray-200 rounded-2xl py-2 px-4 focus:ring-3 focus:ring-sky-500 outline-none transition-all"
                     />
                   </div>
 
@@ -175,7 +178,7 @@ const MyProfileEmplyee = () => {
                     </label>
                     <DatePicker
                       defaultValue={userData.dateOfBirth}
-                      className="input  focus:outline-sky-500 focus:border-none focus:duration-80 w-[250px]"
+                      className="focus:border-none duration-300  bg-white border border-gray-200 rounded-2xl py-2 px-4 focus:ring-3 focus:ring-sky-500 outline-none transition-all w-[250px]"
                       showIcon
                       selected={selectedDate}
                       onChange={setSelectedDate}
@@ -189,12 +192,12 @@ const MyProfileEmplyee = () => {
                         Phone Number
                       </span>
                     </label>
-                    <input
-                      type="text"
+                    <Input
+                      type="number"
                       placeholder="+880"
                       defaultValue={userData?.phoneNumber}
-                      {...register("phoneNumber")}
-                      className="input  focus:outline-sky-500 focus:border-none focus:duration-80 w-full"
+                      name="phoneNumber"
+                      register={register}
                     />
                   </div>
 
@@ -205,12 +208,12 @@ const MyProfileEmplyee = () => {
                         Location
                       </span>
                     </label>
-                    <input
+                    <Input
                       type="text"
                       placeholder="City, Country"
                       defaultValue={userData?.location}
-                      {...register("location")}
-                      className="input  focus:outline-sky-500 focus:border-none focus:duration-80 w-full"
+                      name="location"
+                      register={register}
                     />
                   </div>
                   {/* image */}
@@ -224,16 +227,16 @@ const MyProfileEmplyee = () => {
                       <input
                         type="file"
                         {...register("userPhoto")}
-                        className="input  focus:outline-sky-500 focus:border-none focus:duration-80 w-full"
+                        className="w-full focus:border-none duration-300  bg-white border border-gray-200 rounded-2xl py-2 px-4 focus:ring-3 focus:ring-sky-500 outline-none transition-all"
                       />
                     </div>
                   )}
                 </div>
 
                 <div className="mt-10 pt-6 border-t flex justify-end">
-                  <button className="btn btn-primary px-10 rounded-xl shadow-lg shadow-blue-200">
+                  <Button className="btn btn-primary px-10 rounded-xl shadow-lg shadow-blue-200">
                     Save Changes
-                  </button>
+                  </Button>
                 </div>
               </div>
             </form>
@@ -241,7 +244,7 @@ const MyProfileEmplyee = () => {
         </div>
       </div>
     </CardAnimation>
-  );
-};
+  </>
+)};
 
 export default MyProfileEmplyee;
