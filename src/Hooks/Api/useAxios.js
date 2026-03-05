@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://asset-server-one.vercel.app",
+  baseURL: "https://asset-server-six.vercel.app",
 });
 
 export const useAxios = () => {
