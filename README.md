@@ -13,6 +13,6 @@ Live-link:https://asset-management-b021d.web.app/
 * Database: MongoDB
 ## How to install 
 1. Clone the repository: client: https://github.com/prinsahmed/Asset-client.git server:https://github.com/prinsahmed/Asset-server.git
-2. Install dependencies: npm install
-3. Set up your environment variables (create a .env file)
-4. Start the app: npm run dev
+2. Install dependencies: **npm install**
+3. Set up your environment variables **(create a .env file)**
+4. Start the app: **npm run dev**
