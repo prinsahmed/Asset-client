@@ -10,7 +10,7 @@ const LoginRoute = ({ children }) => {
     const { user, loading } = useContext(AuthContext);
 
 
-    if (loading) return <div className=' h-dvh flex justify-center items-center '>
+    if (loading) return <div className='h-dvh flex justify-center items-center '>
         <Lottie style={{ width: 400, height: 400 }} animationData={loadingAnimation} loop={true} />
     </div>
 

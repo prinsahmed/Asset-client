@@ -9,7 +9,7 @@ const Extras = () => {
             {/* How It Works Section */}
             <section>
                 <div className="max-w-7xl mx-auto md:px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl font-extrabold text-gray-900 mt-10 md:mt-20 lg:mt-28 lg:mb-10 md:mb-8 mb-4">
+                    <h2 className="text-3xl font-extrabold text-base-content mt-10 md:mt-20 lg:mt-28 lg:mb-10 md:mb-8 mb-4">
                         How AssetVerse Works
                     </h2>
 
@@ -59,7 +59,7 @@ const Extras = () => {
             </section>
 
             {/* FAQ Section */}
-                        <h2 className="text-3xl font-extrabold text-center text-gray-900 mt-10 md:mt-20 lg:mt-28 lg:mb-10 md:mb-8 mb-4" >
+                        <h2 className="text-3xl font-extrabold text-center text-base-content mt-10 md:mt-20 lg:mt-28 lg:mb-10 md:mb-8 mb-4" >
                             Frequently Asked Questions
                         </h2>
             <div className='md:flex justify-center items-end'>
@@ -69,7 +69,7 @@ const Extras = () => {
                         <div className="space-y-6 mb-4 md:mb-0">
                             {/* FAQ 1 */}
                             <div>
-                                <h3 className="text-lg font-semibold text-gray-900">1. How do I add my assets to AssetVerse?</h3>
+                                <h3 className="text-lg font-semibold text-base-content">1. How do I add my assets to AssetVerse?</h3>
                                 <p className="text-gray-600 mt-2">
                                     Once you sign up, go to your dashboard and click 'Add Asset'. Fill in the details and save. It's that simple!
                                 </p>
@@ -77,7 +77,7 @@ const Extras = () => {
 
                             {/* FAQ 2 */}
                             <div>
-                                <h3 className="text-lg font-semibold text-gray-900">2. Can multiple users access the same account?</h3>
+                                <h3 className="text-lg font-semibold text-base-content">2. Can multiple users access the same account?</h3>
                                 <p className="text-gray-600 mt-2">
                                     Yes! AssetVerse supports multiple users with role-based access for teams and departments.
                                 </p>
@@ -85,7 +85,7 @@ const Extras = () => {
 
                             {/* FAQ 3 */}
                             <div>
-                                <h3 className="text-lg font-semibold text-gray-900">3. Is my data secure?</h3>
+                                <h3 className="text-lg font-semibold text-base-content">3. Is my data secure?</h3>
                                 <p className="text-gray-600 mt-2">
                                     Absolutely. AssetVerse uses industry-standard encryption and secure access controls to protect your data.
                                 </p>

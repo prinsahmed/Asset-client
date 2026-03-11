@@ -2,8 +2,9 @@ import React, { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../../Context/Context";
 import Swal from "sweetalert2";
-import Button from "../Button/Button";
+
 import NavDropdown from "./NavDropdown";
+import { ThemeToggle } from "../Theme/ThemeToggle";
 
 const NavBar = () => {
   const { user, signOutCurrentUser } = useContext(AuthContext);
@@ -32,7 +33,9 @@ const NavBar = () => {
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu nav2 menu-horizontal bg-gray-400/30 p-0 shadow-lg  backdrop-blur-lg rounded-full text-white ">
+          <ThemeToggle/>
           <li>
+           
             <NavLink to="/">Home</NavLink>
           </li>
           {!user && (
@@ -52,6 +55,12 @@ const NavBar = () => {
               <NavLink to="/dash">Dashboard</NavLink>
             </li>
           )}
+          <li>
+            <NavLink to="/about">About Us</NavLink>
+          </li>
+          <li>
+            <NavLink to="/contact-us">Contact Us</NavLink>
+          </li>
         </ul>
       </div>
       <div className="navbar-end">

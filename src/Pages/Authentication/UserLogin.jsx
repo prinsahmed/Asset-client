@@ -59,7 +59,7 @@ const UserLogin = () => {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-[#f8fafc] flex items-center justify-center px-4 pt-24"
+      className="min-h-screen bg-base-100 text-base-content  flex items-center justify-center px-4 pt-24"
     >
       <div className="max-w-5xl w-full flex flex-col md:flex-row items-center justify-center gap-12 lg:gap-20">
         <div className="hidden md:block w-full max-w-md lg:max-w-lg">

@@ -5,7 +5,7 @@ const Feature = () => {
   return (
     <section>
       <div className="max-w-7xl mx-auto md:px-4  lg:px-8 text-center">
-        <h2 className="text-3xl font-extrabold text-gray-900 mt-10 md:mt-20 lg:mt-28 lg:mb-10 md:mb-8 mb-4">
+        <h2 className="text-3xl font-extrabold text-base-content mt-10 md:mt-20 lg:mt-28 lg:mb-10 md:mb-8 mb-4">
           Key Features
         </h2>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">

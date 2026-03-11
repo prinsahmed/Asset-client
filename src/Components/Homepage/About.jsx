@@ -8,7 +8,7 @@ import CardAnimation from '../Animations/CardAnimation';
 const About = () => {
     return (
         <div>
-            <h2 className='text-3xl text-center font-extrabold text-gray-900 mt-10 md:mt-16 lg:mt-22 lg:mb-10 md:mb-8 mb-4'>About Us</h2>
+            <h2 className='text-3xl text-center font-extrabold text-base-content mt-10 md:mt-16 lg:mt-22 lg:mb-10 md:mb-8 mb-4'>About Us</h2>
             <div className='md:flex justify-center  gap-x-5 '>
                 <div className="space-y-4">
 
@@ -19,7 +19,7 @@ const About = () => {
                         className="bg-white shadow-[0px_8px_24px_rgba(149,157,165,0.2)] rounded-xl p-6 ml-0">
                         <div className='flex items-center gap-x-1'>
                             <img className='w-12' src={trackImg} alt="tracking asset" />
-                            <h3 className="font-semibold text-lg">Centralized Asset Tracking</h3>
+                            <h3 className="font-semibold  text-lg">Centralized Asset Tracking</h3>
                         </div>
                         <p className='text-[15px] text-gray-600'>Keep all company assets—devices, documents, equipment, and resources—in one organized dashboard for complete visibility and control.</p>
                     </CardAnimation>

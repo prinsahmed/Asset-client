@@ -56,7 +56,7 @@ const PricingCard = () => {
 
   return (
     <div>
-      <h2 className="text-3xl text-center font-extrabold text-gray-900 pt-10 lg:pt-24 md:pt-20 lg:mb-13 md:mb-8 mb-4">
+      <h2 className="text-3xl text-center font-extrabold text-base-content pt-10 lg:pt-24 md:pt-20 lg:mb-13 md:mb-8 mb-4">
         Upgrade Package
       </h2>
       <div className=" mx-auto ">

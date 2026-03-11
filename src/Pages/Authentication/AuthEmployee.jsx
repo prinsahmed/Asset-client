@@ -69,7 +69,7 @@ const AuthEmployee = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="pt-24 pb-12 px-4 min-h-screen bg-slate-50 flex items-center justify-center"
+        className="pt-24 pb-12 px-4 min-h-screen bg-base-100 text-base-content  flex items-center justify-center"
       >
         <div className="flex flex-col md:flex-row items-center gap-12 max-w-6xl w-full">
           <div className="hidden md:block w-1/2">

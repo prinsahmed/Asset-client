@@ -25,6 +25,8 @@ import AuthEmployee from "../Pages/Authentication/AuthEmployee";
 import AuthHR from "../Pages/Authentication/AuthHR";
 import ForgotPass from "../Pages/Authentication/ForgotPass";
 import UserLogin from "../Pages/Authentication/UserLogin";
+import About from "../Pages/About/About";
+import ContactUs from "../Pages/Contact-Us/ContactUs";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +37,14 @@ export const router = createBrowserRouter([
         index: true,
         Component: HomePage,
       },
+      {
+        path:'/about',
+        Component:About
+      },
+      {
+        path:'/contact-us',
+        Component:ContactUs
+      }
     ],
   },
   {
@@ -177,7 +187,7 @@ export const router = createBrowserRouter([
     element: (
       <LoginRoute>
         <HRroute>
-          <PaymentSuccess />
+        <PaymentSuccess />
         </HRroute>
       </LoginRoute>
     ),

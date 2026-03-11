@@ -12,7 +12,7 @@ const Statistics = () => {
             <div className="max-w-7xl mx-auto pb-14  lg:px-8 text-center">
 
 
-                <h2 className="text-3xl font-extrabold text-gray-900 mt-10 md:mt-20 lg:mt-28 md:mb-10 mb-4">What Our Clients Say & Stats</h2>
+                <h2 className="text-3xl font-extrabold text-base-content mt-10 md:mt-20 lg:mt-28 md:mb-10 mb-4">What Our Clients Say & Stats</h2>
 
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-12">

@@ -7,8 +7,11 @@ import {
   LayoutDashboard,
   UserPlus,
   Users,
+  ContactRound,
+  Info
 } from "lucide-react";
 import { AuthContext } from "../../Context/Context";
+import { ThemeToggle } from "../Theme/ThemeToggle";
 
 const NavDropdown = () => {
   const {user} = useContext(AuthContext);
@@ -64,6 +67,7 @@ const NavDropdown = () => {
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             className="absolute -right-50  w-64 origin-top-right rounded-r-xl border border-white/10 bg-[#160B3A]/90 backdrop-blur-xl p-2 shadow-2xl z-[100]"
           >
+            <ThemeToggle/>
             <DropLink to="/" icon={Home}>
               Home
             </DropLink>
@@ -81,8 +85,18 @@ const NavDropdown = () => {
                 <DropLink to="/auth/HR-registration" icon={Users}>
                   Join as HR
                 </DropLink>
+                
               </>
             )}
+            <li>
+              <DropLink to="/about" icon={Info}>
+                  About Us
+                </DropLink>
+                        
+                      </li>
+                      <li>
+                        <DropLink icon={ContactRound} to="/contact-us">Contact Us</DropLink>
+                      </li>
           </motion.ul>
         )}
       </AnimatePresence>

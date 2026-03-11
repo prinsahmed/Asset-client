@@ -26,7 +26,7 @@ const DashboardLayout = () => {
   const [isOpen, setIsOpen] = useState(window.innerWidth > 1024);
 
   return (
-    <div className="flex min-h-screen bg-gray-50 overflow-hidden">
+    <div className="flex min-h-screen bg-base-100 text-base-content  overflow-hidden">
       {/* 1. ANIMATED OVERLAY (Mobile Only) */}
       <AnimatePresence>
         {isOpen && (
@@ -49,7 +49,7 @@ const DashboardLayout = () => {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -300, opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed lg:static inset-y-0 left-0 z-50 w-72 min-h-screen bg-white border-r border-gray-200 flex flex-col shadow-2xl lg:shadow-none"
+            className="fixed lg:static inset-y-0 left-0 z-50 w-72 min-h-screen bg-base-100 text-base-content  border-r border-gray-200 flex flex-col shadow-2xl lg:shadow-none"
           >
             {/* Sidebar Profile Section */}
             <div className="p-6 border-b border-gray-100 bg-gray-50/50 flex items-center justify-between">
